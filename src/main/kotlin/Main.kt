@@ -44,8 +44,9 @@ fun myPage(currentSection: Section) {
         Section.CALENDAR -> Content(currentSection = Section.CALENDAR)
         Section.FILIAR -> Content(currentSection = Section.FILIAR)
         Section.PATIENTS -> Content(currentSection = Section.PATIENTS)
+        Section.DATES -> Content(currentSection = Section.DATES)
     }
 }
 enum class Section {
-    HOME, CALENDAR, FILIAR, PATIENTS
+    HOME, CALENDAR, FILIAR, PATIENTS, DATES
 }

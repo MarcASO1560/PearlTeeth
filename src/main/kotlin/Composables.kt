@@ -1,5 +1,7 @@
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -18,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
@@ -26,6 +29,10 @@ import androidx.compose.ui.window.WindowState
 //Piezas importantes para la página principal.
 @Composable
 fun SideBar(onSectionSelected: (Section) -> Unit) {
+    val ButtonColor1 = remember { mutableStateOf(Grey)}
+    val ButtonColor2 = remember { mutableStateOf(Grey)}
+    val ButtonColor3 = remember { mutableStateOf(Grey)}
+    val ButtonColor4 = remember { mutableStateOf(Grey)}
     var currentSection by remember { mutableStateOf(Section.HOME) }
     MaterialTheme {
         Box(
@@ -44,12 +51,17 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                     onClick = {
                         currentSection = Section.CALENDAR
                         onSectionSelected(currentSection)
+                        ButtonColor1.value = Turquoise
+                        ButtonColor2.value = Grey
+                        ButtonColor3.value = Grey
+                        ButtonColor4.value = Grey
+
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp),
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Grey)
+                        backgroundColor = ButtonColor1.value)
                 ){
                     Column {
                         Icon(
@@ -76,11 +88,15 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                     onClick = {
                         currentSection = Section.FILIAR
                         onSectionSelected(currentSection)
+                        ButtonColor1.value = Grey
+                        ButtonColor2.value = Turquoise
+                        ButtonColor3.value = Grey
+                        ButtonColor4.value = Grey
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Grey)
+                    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor2.value)
                 ){
                     Column {
                         Icon(
@@ -107,11 +123,15 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                     onClick = {
                         currentSection = Section.PATIENTS
                         onSectionSelected(currentSection)
+                        ButtonColor1.value = Grey
+                        ButtonColor2.value = Grey
+                        ButtonColor3.value = Turquoise
+                        ButtonColor4.value = Grey
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Grey)
+                    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor3.value)
                 ){
                     Column {
                         Icon(
@@ -125,6 +145,41 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                         )
                         Text(
                             text = "Pacientes",
+                            fontSize = 10.sp,
+                            color = White,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize(Alignment.Center)
+                        )
+                    }
+                }
+                Button(
+                    onClick = {
+                        currentSection = Section.DATES
+                        onSectionSelected(currentSection)
+                        ButtonColor1.value = Grey
+                        ButtonColor2.value = Grey
+                        ButtonColor3.value = Grey
+                        ButtonColor4.value = Turquoise
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor4.value)
+                ){
+                    Column {
+                        Icon(
+                            Icons.Filled.Check,
+                            tint = White,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentSize(Alignment.Center)
+                                .size(50.dp),
+                            contentDescription = "Dates"
+                        )
+                        Text(
+                            text = "Citas",
                             fontSize = 10.sp,
                             color = White,
                             fontWeight = FontWeight.Bold,
@@ -158,6 +213,7 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
         }
     }
 }
+@Preview
 @Composable
 fun Content(currentSection: Section) {
     val image = painterResource("drawable/PearlTeethIcon.png")
@@ -193,36 +249,67 @@ fun Content(currentSection: Section) {
                 }
             }
             Section.CALENDAR -> {
-                Card (elevation = 6.dp, modifier = Modifier
+                Card (elevation = 3.dp, modifier = Modifier
                     .padding(30.dp)
                     .wrapContentSize(Alignment.Center)
                     .fillMaxSize()
-                    .shadow(50.dp)
-                    .clip(shape = RoundedCornerShape(20.dp)),
+                    .shadow(30.dp)
+                    .clip(shape = RoundedCornerShape(15.dp)),
                 ) {
-                    Text("ESTO ES LA ZONA DEL CALENDARIO", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ){
+                        Box(modifier = Modifier.fillMaxSize().weight(1.75f).background(White)){
+                            Card (elevation = 1.dp, modifier = Modifier
+                                .padding(30.dp)
+                                .wrapContentSize(Alignment.Center)
+                                .fillMaxSize()
+                                .shadow(30.dp)
+                                .clip(shape = RoundedCornerShape(10.dp)),
+                            ){
+                                Schedule()
+                            }
+                        }
+                        Box(modifier = Modifier.fillMaxSize().weight(1.25f).background(Bright1)){
+                            Column(modifier = Modifier.fillMaxSize().align(Alignment.TopCenter)) {
+                                Box(modifier = Modifier.shadow(5.dp).fillMaxWidth().height(75.dp).background(LightBlue))
+                            }
+                        }
+                    }
                 }
             }
             Section.FILIAR -> {
-                Card (elevation = 6.dp, modifier = Modifier
+                Card (elevation = 3.dp, modifier = Modifier
                     .padding(30.dp)
-                    .wrapContentSize(Alignment.Center)
+                    .wrapContentSize(Alignment.TopCenter)
                     .fillMaxSize()
-                    .shadow(50.dp)
-                    .clip(shape = RoundedCornerShape(20.dp)),
-                    ) {
-                    Text("AQUÍ SE PUEDE AÑADIR UN CLIENTE", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                    .height(80.dp)
+                    .shadow(30.dp)
+                    .clip(shape = RoundedCornerShape(15.dp)),
+                ){
                 }
             }
             Section.PATIENTS -> {
-                Card (elevation = 6.dp, modifier = Modifier
+                Card (elevation = 3.dp, modifier = Modifier
                     .padding(30.dp)
                     .wrapContentSize(Alignment.Center)
                     .fillMaxSize()
-                    .shadow(50.dp)
-                    .clip(shape = RoundedCornerShape(20.dp)),
+                    .shadow(30.dp)
+                    .clip(shape = RoundedCornerShape(15.dp)),
                     ) {
                     Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                }
+            }
+            Section.DATES -> {
+                Card (elevation = 3.dp, modifier = Modifier
+                    .padding(30.dp)
+                    .wrapContentSize(Alignment.Center)
+                    .fillMaxSize()
+                    .shadow(30.dp)
+                    .clip(shape = RoundedCornerShape(15.dp)),
+                ) {
+                    Text("SUSPICIUS MOVEMENT", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
                 }
             }
         }
