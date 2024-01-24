@@ -5,18 +5,31 @@ import androidx.compose.ui.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
+import java.awt.Dimension
+
+const val MIN_HEIGHT = 200
+const val MIN_WIDTH = 300
 
 @Composable
 fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
+    val state = rememberWindowState(
+        placement = WindowPlacement.Maximized
+    )
     val icon = painterResource("drawable/PearlTeethIcon.png")
-    Window(onCloseRequest = { onClose.invoke() }, title = "PearlTeeth", visible = true, state = WindowState(width = 1280.dp, height = 720.dp), icon = icon) {
+    Window(
+        onCloseRequest = { onClose.invoke() },
+        title = "PearlTeeth",
+        visible = true,
+        state = state,
+        icon = icon
+    ) {
+        window.minimumSize = Dimension(800, 600)
         Scaffold(
             topBar =
             {
                 Column {
                     TopBar()
-
                 }
             },
             content = { padding ->

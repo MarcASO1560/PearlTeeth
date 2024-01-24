@@ -9,6 +9,8 @@ import androidx.compose.material.*
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -25,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
+import java.time.LocalDate
 
 //Piezas importantes para la página principal.
 @Composable
@@ -260,21 +263,23 @@ fun Content(currentSection: Section) {
                         modifier = Modifier
                             .fillMaxSize()
                     ){
+                        var currentMonth by remember { mutableStateOf(LocalDate.now().month) }
+                        var currentYear by remember { mutableStateOf(LocalDate.now().year) }
                         Box(modifier = Modifier.fillMaxSize().weight(1.75f).background(White)){
                             Card (elevation = 1.dp, modifier = Modifier
                                 .padding(30.dp)
                                 .wrapContentSize(Alignment.Center)
                                 .fillMaxSize()
-                                .shadow(30.dp)
                                 .clip(shape = RoundedCornerShape(10.dp)),
                             ){
-                                Schedule()
+                                Schedule(currentMonth, currentYear)
                             }
                         }
                         Box(modifier = Modifier.fillMaxSize().weight(1.25f).background(Bright1)){
                             Column(modifier = Modifier.fillMaxSize().align(Alignment.TopCenter)) {
                                 Box(modifier = Modifier.shadow(5.dp).fillMaxWidth().height(75.dp).background(LightBlue))
                             }
+                            dateAdd { TODO() }
                         }
                     }
                 }
@@ -288,6 +293,7 @@ fun Content(currentSection: Section) {
                     .shadow(30.dp)
                     .clip(shape = RoundedCornerShape(15.dp)),
                 ){
+
                 }
             }
             Section.PATIENTS -> {
@@ -309,7 +315,7 @@ fun Content(currentSection: Section) {
                     .shadow(30.dp)
                     .clip(shape = RoundedCornerShape(15.dp)),
                 ) {
-                    Text("SUSPICIUS MOVEMENT", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+
                 }
             }
         }
