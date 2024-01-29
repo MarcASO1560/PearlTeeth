@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.awt.Shape
 import java.time.LocalDate
 import java.time.Month
 
@@ -38,7 +37,8 @@ fun getDaysMatrix(year: Int, month: Month, selectedDay: DayInfo): List<List<DayI
 
 	// Agregar los días del mes anterior a la primera fila
 	for (i in daysInLastMonth - firstDayOfMonth.dayOfWeek.value + 2..daysInLastMonth) {
-		currentRow.add(DayInfo(i, false, month.previous(), year))
+		val prevYear = if (month == Month.JANUARY) year - 1 else year
+		currentRow.add(DayInfo(i, false, month.previous(), prevYear))
 	}
 
 	// Agregar los días del mes actual

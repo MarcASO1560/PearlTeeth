@@ -339,7 +339,7 @@ fun TopBar() {
 @Composable
 fun LoginPage(onClose: () -> Unit) {
     val icon = painterResource("drawable/PearlTeethIcon.png")
-    val state = WindowState(width = 400.dp, height = 600.dp)
+    val state = WindowState(width = 500.dp, height = 700.dp)
     var visibility by remember { mutableStateOf(true) }
     var isMaxScreen by remember { mutableStateOf(false) }
     Window(onCloseRequest = { onClose.invoke() }, title = "Login", visible = visibility, state = state, icon = icon, resizable = false) {
@@ -408,6 +408,7 @@ fun LoginPage(onClose: () -> Unit) {
                                                 color = LightBlue
                                             ) },
                                         modifier = Modifier
+                                            .fillMaxWidth()
                                             .padding(10.dp)
                                             .shadow(30.dp)
                                             .clip(shape = RoundedCornerShape(15.dp))
@@ -444,6 +445,7 @@ fun LoginPage(onClose: () -> Unit) {
                                             }
                                         },
                                         modifier = Modifier
+                                            .fillMaxWidth()
                                             .padding(10.dp)
                                             .shadow(30.dp)
                                             .clip(shape = RoundedCornerShape(15.dp))

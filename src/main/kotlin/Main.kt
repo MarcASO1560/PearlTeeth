@@ -7,9 +7,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import java.awt.Dimension
 
-const val MIN_HEIGHT = 200
-const val MIN_WIDTH = 300
-
 @Composable
 fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
@@ -24,7 +21,7 @@ fun menu(onClose: () -> Unit) {
         state = state,
         icon = icon
     ) {
-        window.minimumSize = Dimension(800, 600)
+        window.minimumSize = Dimension(1380, 800)
         Scaffold(
             topBar =
             {
