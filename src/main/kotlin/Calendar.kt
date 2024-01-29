@@ -1,37 +1,31 @@
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowState
-import java.awt.Color
+import java.awt.Shape
 import java.time.LocalDate
 import java.time.Month
 
+
+data class DayInfo(val day: Int, val isClickable: Boolean, val month: Month, val year: Int)
+
 // Función para obtener la matriz de días del mes y año especificados
-fun getDaysMatrix(year: Int, month: Month): List<List<DayInfo>> {
+fun getDaysMatrix(year: Int, month: Month, selectedDay: DayInfo): List<List<DayInfo>> {
 	val firstDayOfMonth = LocalDate.of(year, month.ordinal + 1, 1)
 	val daysInMonth = firstDayOfMonth.lengthOfMonth()
 
@@ -44,7 +38,7 @@ fun getDaysMatrix(year: Int, month: Month): List<List<DayInfo>> {
 
 	// Agregar los días del mes anterior a la primera fila
 	for (i in daysInLastMonth - firstDayOfMonth.dayOfWeek.value + 2..daysInLastMonth) {
-		currentRow.add(DayInfo(i, false))
+		currentRow.add(DayInfo(i, false, month.previous(), year))
 	}
 
 	// Agregar los días del mes actual
@@ -59,22 +53,28 @@ fun getDaysMatrix(year: Int, month: Month): List<List<DayInfo>> {
 		}
 
 		val isClickable = day <= daysInMonth // Solo permitir hacer clic en los días del mes
-		currentRow.add(DayInfo(day, isClickable))
+		currentRow.add(DayInfo(day, isClickable, month, year))
 	}
 
 	// Completar la última fila con los primeros días del mes siguiente
-	val lastRow = currentRow + (1..7 - currentRow.size).map { DayInfo(it, false) }
+	val nextMonth = if (month == Month.DECEMBER) Month.JANUARY else month.next()
+	val nextMonthYear = if (month == Month.DECEMBER) year + 1 else year
+
+	val lastRow = currentRow + (1..7 - currentRow.size).map { DayInfo(it, false, nextMonth, nextMonthYear) }
 	daysMatrix.add(lastRow)
 
-	// Asegurarse de tener 6 filas
-	while (daysMatrix.size < 5) {
-		daysMatrix.add(List(6) { DayInfo(0, false) })
+	// Asegurarse de tener 4 filas
+	while (daysMatrix.size < 4) {
+		daysMatrix.add(List(7) { DayInfo(0, false, nextMonth, nextMonthYear) })
 	}
 
 	return daysMatrix
 }
 
-data class DayInfo(val day: Int, val isClickable: Boolean)
+
+// Funciones de extensión para obtener el mes siguiente y anterior
+fun Month.next(): Month = if (this == Month.DECEMBER) Month.JANUARY else Month.values()[this.ordinal + 1]
+fun Month.previous(): Month = if (this == Month.JANUARY) Month.DECEMBER else Month.values()[this.ordinal - 1]
 @Composable
 fun Schedule(currentMonth: Month, currentYear: Int) {
 	// Agrega esta función a tu código
@@ -97,10 +97,13 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 
 	var currentMonth by remember { mutableStateOf(LocalDate.now().month) }
 	var currentYear by remember { mutableStateOf(LocalDate.now().year) }
-	var daysMatrix by remember { mutableStateOf(getDaysMatrix(currentYear, currentMonth)) }
-
+	var selectedDay by remember {
+		val today = LocalDate.now()
+		mutableStateOf(DayInfo(today.dayOfMonth, true, today.month, today.year))
+	}
+	var daysMatrix by remember { mutableStateOf(getDaysMatrix(currentYear, currentMonth, selectedDay)) }
 	fun updateDaysMatrix() {
-		daysMatrix = getDaysMatrix(currentYear, currentMonth)
+		daysMatrix = getDaysMatrix(currentYear, currentMonth, selectedDay)
 	}
 
 	Column {
@@ -116,7 +119,12 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 					onClick = {
 						// Función para retroceder un mes
 						currentMonth =
-							if (currentMonth == Month.JANUARY) Month.DECEMBER else Month.values()[currentMonth.ordinal - 1]
+							if (currentMonth == Month.JANUARY) {
+								currentYear--
+								Month.DECEMBER
+							} else {
+								Month.values()[currentMonth.ordinal - 1]
+							}
 						updateDaysMatrix()
 					},
 					modifier = Modifier.size(48.dp)
@@ -135,7 +143,12 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 					onClick = {
 						// Función para avanzar un mes
 						currentMonth =
-							if (currentMonth == Month.DECEMBER) Month.JANUARY else Month.values()[currentMonth.ordinal + 1]
+							if (currentMonth == Month.DECEMBER) {
+								currentYear++
+								Month.JANUARY
+							} else {
+								Month.values()[currentMonth.ordinal + 1]
+							}
 						updateDaysMatrix()
 					},
 					modifier = Modifier.size(48.dp)
@@ -264,7 +277,7 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 				Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
 					for (dayInfo in row) {
 						val backgroundColor =
-							if (dayInfo.day > 0) White else Bright2 // Color más oscuro para días no válidos
+							if (dayInfo.day > 0) White else TurquoiseLite // Color más oscuro para días no válidos
 						Card(
 							elevation = 1.dp,
 							modifier = Modifier
@@ -273,22 +286,40 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 								.weight(1f)
 								.shadow(20.dp)
 								.clip(shape = RoundedCornerShape(10.dp))
-								.clickable { if (dayInfo.isClickable){} },
-							backgroundColor = backgroundColor
+								.clickable {
+									if (dayInfo.isClickable) {
+										val selectedMonth = getSpanishMonthName(currentMonth)
+										val currentMonthText = getSpanishMonthName(dayInfo.month)
+										if (currentMonthText == selectedMonth) {
+											selectedDay = dayInfo
+											updateDaysMatrix()
+										}
+									}
+								},
+							backgroundColor = if (dayInfo.day == selectedDay.day && dayInfo.month == selectedDay.month && dayInfo.year == selectedDay.year) LightBlue else backgroundColor,
 						) {
 							Box(
 								modifier = Modifier
 									.fillMaxSize()
 									.padding(2.dp),
-								contentAlignment = Alignment.Center,
+								contentAlignment = Alignment.Center
 							) {
-								Text(
-									text = if (dayInfo.day > 0) dayInfo.day.toString() else "",
-									fontWeight = FontWeight.Bold,
-									fontSize = 16.sp,
-									textAlign = TextAlign.Center,
-									color = if (dayInfo.isClickable) Dark1 else Bright2
-								)
+								Column(
+									horizontalAlignment = Alignment.CenterHorizontally,
+									verticalArrangement = Arrangement.Center
+								) {
+									Text(
+										text = if (dayInfo.day > 0) dayInfo.day.toString() else "",
+										fontWeight = FontWeight.Bold,
+										fontSize = 16.sp,
+										textAlign = TextAlign.Center,
+										color = if (dayInfo.isClickable) {
+											if (dayInfo.day == selectedDay.day && dayInfo.month == selectedDay.month && dayInfo.year == selectedDay.year) White else Dark1
+										} else {
+											if (dayInfo.day == selectedDay.day && dayInfo.month == selectedDay.month && dayInfo.year == selectedDay.year) White else Bright2
+										}
+									)
+								}
 							}
 						}
 					}
@@ -312,7 +343,4 @@ fun dateAdd(onClick: () -> Unit) {
 	) {
 		Icon(Icons.Filled.Add, "Floating action button.", modifier = Modifier.size(35.dp), tint = White)
 	}
-}
-enum class Month {
-	JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
 }

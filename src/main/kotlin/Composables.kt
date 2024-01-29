@@ -157,41 +157,6 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                         )
                     }
                 }
-                Button(
-                    onClick = {
-                        currentSection = Section.DATES
-                        onSectionSelected(currentSection)
-                        ButtonColor1.value = Grey
-                        ButtonColor2.value = Grey
-                        ButtonColor3.value = Grey
-                        ButtonColor4.value = Turquoise
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 10.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor4.value)
-                ){
-                    Column {
-                        Icon(
-                            Icons.Filled.Check,
-                            tint = White,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentSize(Alignment.Center)
-                                .size(50.dp),
-                            contentDescription = "Dates"
-                        )
-                        Text(
-                            text = "Citas",
-                            fontSize = 10.sp,
-                            color = White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentSize(Alignment.Center)
-                        )
-                    }
-                }
             }
             Column(
                 modifier = Modifier
@@ -293,7 +258,7 @@ fun Content(currentSection: Section) {
                     .shadow(30.dp)
                     .clip(shape = RoundedCornerShape(15.dp)),
                 ){
-
+                    Filiar()
                 }
             }
             Section.PATIENTS -> {
@@ -305,17 +270,6 @@ fun Content(currentSection: Section) {
                     .clip(shape = RoundedCornerShape(15.dp)),
                     ) {
                     Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
-                }
-            }
-            Section.DATES -> {
-                Card (elevation = 3.dp, modifier = Modifier
-                    .padding(30.dp)
-                    .wrapContentSize(Alignment.Center)
-                    .fillMaxSize()
-                    .shadow(30.dp)
-                    .clip(shape = RoundedCornerShape(15.dp)),
-                ) {
-
                 }
             }
         }
