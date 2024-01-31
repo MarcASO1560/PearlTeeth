@@ -10,9 +10,25 @@ import java.awt.Dimension
 @Composable
 fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
+    var isOverlayVisible by remember { mutableStateOf(false) }
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
     )
+    if (isOverlayVisible) {
+        Window(
+            onCloseRequest = { isOverlayVisible = false },
+            state = state,
+            undecorated = true,
+            resizable = false
+        ) {
+            TransparentOverlay(
+                modifier = Modifier.fillMaxSize(),
+                onClick = {
+                    isOverlayVisible = false
+                }
+            )
+        }
+    }
     val icon = painterResource("drawable/PearlTeethIcon.png")
     Window(
         onCloseRequest = { onClose.invoke() },
@@ -26,7 +42,7 @@ fun menu(onClose: () -> Unit) {
             topBar =
             {
                 Column {
-                    TopBar()
+                    TopBar(onMenuClick = { isOverlayVisible = true })
                 }
             },
             content = { padding ->

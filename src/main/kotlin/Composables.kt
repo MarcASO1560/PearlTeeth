@@ -221,7 +221,7 @@ fun Content(currentSection: Section) {
                     .padding(30.dp)
                     .wrapContentSize(Alignment.Center)
                     .fillMaxSize()
-                    .shadow(30.dp)
+                    .shadow(elevation = 30.dp,spotColor = Grey)
                     .clip(shape = RoundedCornerShape(15.dp)),
                 ) {
                     Row(
@@ -250,15 +250,26 @@ fun Content(currentSection: Section) {
                 }
             }
             Section.FILIAR -> {
-                Card (elevation = 3.dp, modifier = Modifier
-                    .padding(30.dp)
-                    .wrapContentSize(Alignment.TopCenter)
-                    .fillMaxSize()
-                    .height(80.dp)
-                    .shadow(30.dp)
-                    .clip(shape = RoundedCornerShape(15.dp)),
-                ){
-                    Filiar()
+                Column {
+                    Card (elevation = 1.dp, modifier = Modifier
+                        .padding(30.dp,30.dp,30.dp,15.dp)
+                        .wrapContentSize(Alignment.TopCenter)
+                        .weight(6f)
+                        .shadow(elevation = 30.dp,spotColor = Grey)
+                        .clip(shape = RoundedCornerShape(15.dp)),
+                    ){
+                        Filiar()
+                    }
+                    Card (elevation = 3.dp, modifier = Modifier
+                        .padding(30.dp,0.dp,30.dp,30.dp)
+                        .wrapContentSize(Alignment.TopCenter)
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .shadow(elevation = 30.dp,spotColor = Grey)
+                        .clip(shape = RoundedCornerShape(15.dp)),
+                    ){
+                        addingUserButtons()
+                    }
                 }
             }
             Section.PATIENTS -> {
@@ -266,7 +277,7 @@ fun Content(currentSection: Section) {
                     .padding(30.dp)
                     .wrapContentSize(Alignment.Center)
                     .fillMaxSize()
-                    .shadow(30.dp)
+                    .shadow(elevation = 30.dp,spotColor = Grey)
                     .clip(shape = RoundedCornerShape(15.dp)),
                     ) {
                     Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
@@ -276,7 +287,7 @@ fun Content(currentSection: Section) {
     }
 }
 @Composable
-fun TopBar() {
+fun TopBar(onMenuClick: () -> Unit) {
     MaterialTheme {
         Box(modifier = Modifier
             .shadow(10.dp)
@@ -323,7 +334,9 @@ fun TopBar() {
                     )
                 }
                 IconButton(
-                    onClick = {}
+                    onClick = {
+                        onMenuClick
+                    }
                 ){
                     Icon(
                         Icons.Filled.Menu,

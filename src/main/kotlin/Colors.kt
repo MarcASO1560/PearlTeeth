@@ -13,7 +13,7 @@ val Bright1 = Color(0xffeeeeee)
 val LightBlue = Color(0xff55bce5)
 val TurquoiseLite = Color(0xff6BB8B0)
 val Turquoise = Color(0xff418c84)
-val Lilac      = Color(0xff8e64d5)
+val Lilac = Color(0xff8e64d5)
 
 //TEXT COLORS
 val Grey  = Color(0xff888888)
