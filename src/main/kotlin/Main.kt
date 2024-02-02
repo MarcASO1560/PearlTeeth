@@ -3,7 +3,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.res.*
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import java.awt.Dimension
 
@@ -14,24 +13,10 @@ fun menu(onClose: () -> Unit) {
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
     )
-    if (isOverlayVisible) {
-        Window(
-            onCloseRequest = { isOverlayVisible = false },
-            state = state,
-            undecorated = true,
-            resizable = false
-        ) {
-            TransparentOverlay(
-                modifier = Modifier.fillMaxSize(),
-                onClick = {
-                    isOverlayVisible = false
-                }
-            )
-        }
-    }
     val icon = painterResource("drawable/PearlTeethIcon.png")
     Window(
-        onCloseRequest = { onClose.invoke() },
+        onCloseRequest = {
+            onClose.invoke() },
         title = "PearlTeeth",
         visible = true,
         state = state,
@@ -39,12 +24,6 @@ fun menu(onClose: () -> Unit) {
     ) {
         window.minimumSize = Dimension(1380, 800)
         Scaffold(
-            topBar =
-            {
-                Column {
-                    TopBar(onMenuClick = { isOverlayVisible = true })
-                }
-            },
             content = { padding ->
                 Surface(
                     modifier = Modifier
@@ -52,11 +31,19 @@ fun menu(onClose: () -> Unit) {
                         .padding(padding),
                     color = Bright1
                 ){
-                    Row {
-                        SideBar { section ->
-                            currentSection = section
+                    Column {
+                        TopBar(onMenuClick = { isOverlayVisible = true })
+                        Row {
+                            SideBar { section ->
+                                currentSection = section
+                            }
+                            myPage(currentSection)
                         }
-                        myPage(currentSection)
+                    }
+                }
+                if (isOverlayVisible) {
+                    TransparentOverlay {
+                        isOverlayVisible = false
                     }
                 }
             }

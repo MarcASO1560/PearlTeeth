@@ -334,9 +334,7 @@ fun TopBar(onMenuClick: () -> Unit) {
                     )
                 }
                 IconButton(
-                    onClick = {
-                        onMenuClick
-                    }
+                    onClick = onMenuClick
                 ){
                     Icon(
                         Icons.Filled.Menu,

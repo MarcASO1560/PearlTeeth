@@ -116,7 +116,7 @@ fun DatosFiliacion() {
 								onValueChange = { apellido.value = it },
 								label = {
 									Text(
-										text = "Primer Apellido",
+										text = "Apellidos",
 										fontSize = 14.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
@@ -614,7 +614,7 @@ fun DatosDomicilio() {
 @Composable
 fun DatosPersonales() {
 	//Datos Personales
-	var fechaNacimiento = remember { mutableStateOf("") }
+	var fechaNacimiento = remember { mutableStateOf("DD-MM-AAAA") }
 	var fechaAlta = remember { mutableStateOf("") }
 	var profesion = remember { mutableStateOf("") }
 	var hijos = remember { mutableStateOf("") }
