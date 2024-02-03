@@ -35,7 +35,7 @@ fun TransparentOverlay(onOverlayDismiss: () -> Unit) {
 		var currentMonth by remember { mutableStateOf(LocalDate.now().month) }
 		var currentYear by remember { mutableStateOf(LocalDate.now().year) }
 		Box(modifier = Modifier.shadow(elevation = 30.dp,spotColor = Black).size(650.dp).clip(shape = RoundedCornerShape(15.dp))){
-			Schedule2(currentMonth, currentYear)
+			Schedule2(currentMonth, currentYear, "Aún no tiene idea de lo que le espera.")
 		}
 	}
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -21,7 +22,7 @@ import java.time.LocalDate
 import java.time.Month
 
 @Composable
-fun Schedule2(currentMonth: Month, currentYear: Int) {
+fun Schedule2(currentMonth: Month, currentYear: Int, title: String) {
 	// Agrega esta función a tu código
 	fun getSpanishMonthName(month: Month): String {
 		return when (month) {
@@ -53,8 +54,9 @@ fun Schedule2(currentMonth: Month, currentYear: Int) {
 	}
 
 	Column {
+		Text(text = title, color = White)
 		// Añade un TextField para seleccionar el año
-		OutlinedTextField(
+		TextField(
 			value = selectedYear.toString(),
 			onValueChange = {
 				// Maneja el cambio de año
@@ -64,11 +66,31 @@ fun Schedule2(currentMonth: Month, currentYear: Int) {
 					updateDaysMatrix()
 				}
 			},
-			label = { Text("Año") },
+			colors = TextFieldDefaults.textFieldColors(
+				backgroundColor = Turquoise,
+				focusedIndicatorColor = White,
+				cursorColor = TurquoiseLite,
+				textColor = White,
+				unfocusedIndicatorColor = Turquoise
+			),
+			label = {
+				Text(
+					textAlign = TextAlign.Center,
+					text = "Año",
+					fontSize = 14.sp,
+					fontWeight = FontWeight.Bold,
+					color = White
+				) },
 			keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
 			modifier = Modifier
-				.padding(8.dp)
+				.background(Turquoise)
 				.fillMaxWidth()
+				.wrapContentSize(align = Alignment.Center),
+			textStyle = TextStyle(
+				textAlign = TextAlign.Center,
+				fontWeight = FontWeight.Bold,
+				fontSize = 20.sp
+			)
 		)
 		Box(modifier = Modifier.fillMaxWidth().height(60.dp).background(Turquoise)){
 			Row(
