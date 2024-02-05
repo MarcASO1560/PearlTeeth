@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.runtime.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -25,11 +27,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import java.time.LocalDate
 
 //Piezas importantes para la página principal.
+var accountName = "adminconnombrelargo@pearlteeth.es"
 @Composable
 fun SideBar(onSectionSelected: (Section) -> Unit) {
     val ButtonColor1 = remember { mutableStateOf(Grey)}
@@ -320,26 +324,47 @@ fun TopBar(onMenuClick: () -> Unit) {
             }
             Row(
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(10.dp,10.dp,10.dp,10.dp)
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.CenterEnd)
             ){
-                IconButton(
-                    onClick = {}
+                Button(
+                    onClick = {},
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = TurquoiseLite),
+                    modifier = Modifier.width(400.dp).wrapContentSize(align = Alignment.CenterEnd)
                 ){
-                    Icon(
-                        Icons.Filled.Person,
-                        tint = White,
-                        contentDescription = "person"
-                    )
+                    Row {
+                        Icon(
+                            Icons.Filled.AccountBox,
+                            tint = White,
+                            contentDescription = "person",
+                            modifier = Modifier
+                                .size(40.dp)
+                                .fillMaxSize()
+                                .wrapContentSize(align = Alignment.CenterStart)
+                        )
+                        Text(
+                            text = accountName,
+                            fontWeight = FontWeight.Bold,
+                            color = White,
+                            fontSize = 14.sp,
+                            modifier = Modifier
+                                .padding(0.dp,0.dp,10.dp,0.dp)
+                                .fillMaxHeight()
+                                .wrapContentSize(align = Alignment.Center)
+                        )
+                    }
                 }
                 IconButton(
-                    onClick = onMenuClick
+                    onClick = onMenuClick,
+                    modifier = Modifier
+                        .padding(10.dp,0.dp,0.dp,0.dp)
                 ){
                     Icon(
                         Icons.Filled.Menu,
                         tint = White,
-                        contentDescription = "menu"
+                        contentDescription = "menu",
                     )
                 }
             }
@@ -472,8 +497,12 @@ fun LoginPage(onClose: () -> Unit) {
                                     var isSecondWindowOpen by remember { mutableStateOf(false) }
                                     Button(
                                         onClick = {
-                                            isSecondWindowOpen = true
-                                            isMaxScreen = !isMaxScreen
+                                            if (validateFields(Mail.value, Password.value)) {
+                                                // Aquí puedes realizar la lógica de inicio de sesión
+                                                isSecondWindowOpen = true
+                                                isMaxScreen = !isMaxScreen
+                                            } else {
+                                            }
                                         },
                                         modifier = Modifier
                                             .fillMaxWidth()

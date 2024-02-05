@@ -5,11 +5,13 @@ import androidx.compose.ui.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.window.*
 import java.awt.Dimension
+import java.time.LocalDate
 
 @Composable
 fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
     var isOverlayVisible by remember { mutableStateOf(false) }
+    var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
     )
@@ -41,10 +43,17 @@ fun menu(onClose: () -> Unit) {
                         }
                     }
                 }
-                if (isOverlayVisible) {
-                    TransparentOverlay {
-                        isOverlayVisible = false
-                    }
+                val currentShowOverlay by rememberUpdatedState(showOverlay.value)
+                if (currentShowOverlay) {
+                    // Llamada a CalendarOverlay desde el main
+                    CalendarOverlay(
+                        selectedDateState = selectedDateState,
+                        onOverlayDismiss = {
+                            // Lógica que se ejecutará cuando se cierre el overlay
+                            showOverlay.value = false
+                        },
+                        onOverlayAction = {},
+                    )
                 }
             }
         )

@@ -15,11 +15,46 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
-import java.time.LocalDate
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TransparentOverlay(onOverlayDismiss: () -> Unit) {
+fun CalendarOverlay(
+	selectedDateState: DateState,
+	onOverlayDismiss: () -> Unit,
+	onOverlayAction: () -> Unit,
+){
+	Box(
+		modifier = Modifier
+			.fillMaxSize()
+			.background(color = TransparentBlack)
+			.onClick {
+				onOverlayAction.invoke()
+					 },
+		contentAlignment = Alignment.Center
+	) {
+		Column {
+			ButtonClear(
+				onClick = {
+					onOverlayDismiss.invoke()
+				}
+			)
+			Box(modifier = Modifier.shadow(elevation = 30.dp,spotColor = Black).size(650.dp,550.dp).clip(shape = RoundedCornerShape(15.dp))){
+				Schedule2(
+					initialDay = selectedDateState.day,
+					initialMonth = selectedDateState.month.toInt(),
+					initialYear = selectedDateState.year
+				)
+			}
+		}
+	}
+}
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun LoginOverlay(
+	onOverlayDismiss: () -> Unit,
+	onOverlayAction: () -> Unit
+) {
 	Box(
 		modifier = Modifier
 			.fillMaxSize()
@@ -30,13 +65,9 @@ fun TransparentOverlay(onOverlayDismiss: () -> Unit) {
 		ButtonClear(
 			onClick = {
 				onOverlayDismiss.invoke()
+				onOverlayAction.invoke()
 			}
 		)
-		var currentMonth by remember { mutableStateOf(LocalDate.now().month) }
-		var currentYear by remember { mutableStateOf(LocalDate.now().year) }
-		Box(modifier = Modifier.shadow(elevation = 30.dp,spotColor = Black).size(650.dp).clip(shape = RoundedCornerShape(15.dp))){
-			Schedule2(currentMonth, currentYear, "Aún no tiene idea de lo que le espera.")
-		}
 	}
 }
 
@@ -45,18 +76,18 @@ fun ButtonClear(onClick: () -> Unit){
 	Button(
 		onClick = onClick,
 		modifier = Modifier
-			.padding(20.dp)
-			.fillMaxSize()
+			.padding(0.dp,0.dp,0.dp,20.dp)
+			.width(650.dp)
 			.wrapContentSize(align = Alignment.TopEnd)
 			.shadow(elevation = 60.dp,spotColor = Black)
-			.size(60.dp)
 			.clip(shape = CircleShape),
 		colors = ButtonDefaults.buttonColors(backgroundColor = RedDestructor)
 	) {
 		Icon(
 			Icons.Filled.Clear,
 			tint = White,
-			contentDescription = "Delete"
+			contentDescription = "Delete",
+			modifier = Modifier.padding(0.dp,11.dp,0.dp,11.dp)
 		)
 	}
 }

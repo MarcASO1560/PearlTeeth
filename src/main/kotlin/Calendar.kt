@@ -1,4 +1,3 @@
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -22,9 +21,56 @@ import java.time.Month
 
 
 data class DayInfo(val day: Int, val isClickable: Boolean, val month: Month, val year: Int)
+var selectedDate by mutableStateOf(LocalDate.now())
 
 // Función para obtener la matriz de días del mes y año especificados
 fun getDaysMatrix(year: Int, month: Month, selectedDay: DayInfo): List<List<DayInfo>> {
+	val firstDayOfMonth = LocalDate.of(year, month.ordinal + 1, 1)
+	val daysInMonth = firstDayOfMonth.lengthOfMonth()
+
+	// Obtener el último día del mes anterior
+	val lastDayOfPreviousMonth = firstDayOfMonth.minusDays(1)
+	val daysInLastMonth = lastDayOfPreviousMonth.dayOfMonth
+
+	val daysMatrix = mutableListOf<List<DayInfo>>()
+	var currentRow = mutableListOf<DayInfo>()
+
+	// Agregar los días del mes anterior a la primera fila
+	for (i in daysInLastMonth - firstDayOfMonth.dayOfWeek.value + 2..daysInLastMonth) {
+		val prevYear = if (month == Month.JANUARY) year - 1 else year
+		currentRow.add(DayInfo(i, false, month.previous(), prevYear))
+	}
+
+	// Agregar los días del mes actual
+	for (day in 1..daysInMonth) {
+		val currentDate = LocalDate.of(year, month.ordinal + 1, day)
+		val dayOfWeek = currentDate.dayOfWeek.value
+
+		if (dayOfWeek == 1 && currentRow.isNotEmpty()) {
+			// Cambiar de semana, agregar la fila actual y reiniciar
+			daysMatrix.add(currentRow.toList())
+			currentRow.clear()
+		}
+
+		val isClickable = day <= daysInMonth // Solo permitir hacer clic en los días del mes
+		currentRow.add(DayInfo(day, isClickable, month, year))
+	}
+
+	// Completar la última fila con los primeros días del mes siguiente
+	val nextMonth = if (month == Month.DECEMBER) Month.JANUARY else month.next()
+	val nextMonthYear = if (month == Month.DECEMBER) year + 1 else year
+
+	val lastRow = currentRow + (1..7 - currentRow.size).map { DayInfo(it, false, nextMonth, nextMonthYear) }
+	daysMatrix.add(lastRow)
+
+	// Asegurarse de tener 4 filas
+	while (daysMatrix.size < 4) {
+		daysMatrix.add(List(7) { DayInfo(0, false, nextMonth, nextMonthYear) })
+	}
+
+	return daysMatrix
+}
+fun getDaysMatrix2(year: Int, month: Month, selectedDay: String): List<List<DayInfo>> {
 	val firstDayOfMonth = LocalDate.of(year, month.ordinal + 1, 1)
 	val daysInMonth = firstDayOfMonth.lengthOfMonth()
 
