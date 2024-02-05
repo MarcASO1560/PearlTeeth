@@ -6,12 +6,11 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.window.*
 import java.awt.Dimension
 import java.time.LocalDate
-
+var textoTituloPanel = mutableStateOf("Menu principal")
 @Composable
 fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
     var isOverlayVisible by remember { mutableStateOf(false) }
-    var selectedDate by remember { mutableStateOf(LocalDate.now()) }
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
     )

@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material3.Icon
@@ -20,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -71,23 +73,15 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                         backgroundColor = ButtonColor1.value)
                 ){
                     Column {
-                        Icon(
-                            Icons.Filled.DateRange,
-                            tint = White,
+                        val Calendar = painterResource("drawable/baseline_calendar_month_white_48.png")
+                        Image(
+                            painter = Calendar,
+                            contentDescription = "Add",
                             modifier = Modifier
+                                .padding(0.dp,0.dp,0.dp,0.dp)
                                 .fillMaxWidth()
                                 .wrapContentSize(Alignment.Center)
                                 .size(50.dp),
-                            contentDescription = "Calendar"
-                        )
-                        Text(
-                            text = "Calendario",
-                            fontSize = 10.sp,
-                            color = White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentSize(Alignment.Center)
                         )
                     }
                 }
@@ -106,23 +100,15 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor2.value)
                 ){
                     Column {
-                        Icon(
-                            Icons.Filled.Add,
-                            tint = White,
+                        val addPerson = painterResource("drawable/baseline_person_add_white_48.png")
+                        Image(
+                            painter = addPerson,
+                            contentDescription = "Add",
                             modifier = Modifier
+                                .padding(0.dp,0.dp,10.dp,0.dp)
                                 .fillMaxWidth()
                                 .wrapContentSize(Alignment.Center)
                                 .size(50.dp),
-                            contentDescription = "Add"
-                        )
-                        Text(
-                            text = "Filiar",
-                            fontSize = 10.sp,
-                            color = White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentSize(Alignment.Center)
                         )
                     }
                 }
@@ -141,23 +127,15 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                     colors = ButtonDefaults.buttonColors(backgroundColor = ButtonColor3.value)
                 ){
                     Column {
-                        Icon(
-                            Icons.Filled.Check,
-                            tint = White,
+                        val PersonSearch = painterResource("drawable/baseline_person_search_white_48.png")
+                        Image(
+                            painter = PersonSearch,
+                            contentDescription = "Add",
                             modifier = Modifier
+                                .padding(10.dp,0.dp,0.dp,0.dp)
                                 .fillMaxWidth()
                                 .wrapContentSize(Alignment.Center)
                                 .size(50.dp),
-                            contentDescription = "Pacients"
-                        )
-                        Text(
-                            text = "Pacientes",
-                            fontSize = 10.sp,
-                            color = White,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentSize(Alignment.Center)
                         )
                     }
                 }
@@ -277,14 +255,67 @@ fun Content(currentSection: Section) {
                 }
             }
             Section.PATIENTS -> {
-                Card (elevation = 3.dp, modifier = Modifier
-                    .padding(30.dp)
-                    .wrapContentSize(Alignment.Center)
-                    .fillMaxSize()
-                    .shadow(elevation = 30.dp,spotColor = Grey)
-                    .clip(shape = RoundedCornerShape(15.dp)),
+                Column{
+                    var Buscador = remember { mutableStateOf("") }
+                    Box(
+                        modifier = Modifier
+                            .padding(30.dp,30.dp,30.dp,15.dp)
+                            .fillMaxWidth()
+                            .shadow(elevation = 20.dp, spotColor = Turquoise)
+                            .clip(shape = RoundedCornerShape(10.dp))
+                            .background(White)
+                            .height(50.dp)
                     ) {
-                    Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp)
+                        ) {
+                            IconButton(onClick = {}
+                            ) {
+                                androidx.compose.material.Icon(
+                                    Icons.Filled.Search,
+                                    tint = Turquoise,
+                                    modifier = Modifier.background(White),
+                                    contentDescription = "CalendarDatePicker"
+                                )
+                            }
+                            TextField(
+                                value = Buscador.value,
+                                onValueChange = { Buscador.value = it },
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = TextFieldDefaults.textFieldColors(
+                                    backgroundColor = White,
+                                    focusedIndicatorColor = Turquoise,
+                                    cursorColor = Grey,
+                                    textColor = Dark2,
+                                    unfocusedIndicatorColor = White
+                                ),
+                                textStyle = TextStyle(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp
+                                ),
+                                keyboardOptions = KeyboardOptions.Default.copy(
+                                    keyboardType = KeyboardType.Number
+                                ),
+                                keyboardActions = KeyboardActions(
+                                    onDone = {
+                                        // Puedes manejar la acción "Done" si es necesario
+                                    }
+                                )
+                            )
+                        }
+                    }
+                    Card (elevation = 3.dp, modifier = Modifier
+                        .padding(30.dp,0.dp,30.dp,30.dp)
+                        .wrapContentSize(Alignment.Center)
+                        .fillMaxSize()
+                        .shadow(elevation = 30.dp,spotColor = Grey)
+                        .clip(shape = RoundedCornerShape(15.dp)),
+                    ) {
+                        Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                    }
                 }
             }
         }
@@ -321,6 +352,7 @@ fun TopBar(onMenuClick: () -> Unit) {
                         contentDescription = "arrow2"
                     )
                 }
+                Text(text = textoTituloPanel.value, color = White, fontSize = 16.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(25.dp,0.dp,0.dp,0.dp).fillMaxHeight().wrapContentSize(align = Alignment.Center))
             }
             Row(
                 modifier = Modifier

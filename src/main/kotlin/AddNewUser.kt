@@ -133,7 +133,7 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 								),
 								textStyle = TextStyle(
 									fontWeight = FontWeight.Bold,
-									fontSize = 18.sp
+									fontSize = 16.sp
 								)
 							)
 							TextField(
@@ -162,7 +162,7 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 								),
 								textStyle = TextStyle(
 									fontWeight = FontWeight.Bold,
-									fontSize = 18.sp
+									fontSize = 16.sp
 								)
 							)
 							tipoId()
@@ -191,7 +191,7 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 								),
 								textStyle = TextStyle(
 									fontWeight = FontWeight.Bold,
-									fontSize = 18.sp
+									fontSize = 16.sp
 								)
 							)
 						}
@@ -201,7 +201,6 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 								selectedDateState = selectedDateState,
 								onDateSelected = { dateState ->
 									selectedDateState = dateState
-									// Puedes agregar lógica adicional si es necesario
 								}
 							)
 							sexo()
@@ -336,12 +335,9 @@ fun DatosDomicilio() {
 	var Poblacion = remember { mutableStateOf("") }
 	var Provincia = remember { mutableStateOf("") }
 	var Pais = remember { mutableStateOf("") }
-	var TelefonoParticular = remember { mutableStateOf("") }
-	var TelefonoTrabajo = remember { mutableStateOf("") }
-	var Movil = remember { mutableStateOf("") }
-	var Fax = remember { mutableStateOf("") }
+	var TelefonoPrincipal = remember { mutableStateOf("") }
+	var TelefonoAuxiliar = remember { mutableStateOf("") }
 	var Email = remember { mutableStateOf("") }
-	var Web = remember { mutableStateOf("") }
 	Card(
 		backgroundColor = White,
 		modifier = Modifier
@@ -364,7 +360,7 @@ fun DatosDomicilio() {
 								label = {
 									Text(
 										text = "Dirección",
-										fontSize = 14.sp,
+										fontSize =  12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
@@ -381,8 +377,12 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 							TextField(
@@ -391,12 +391,12 @@ fun DatosDomicilio() {
 								label = {
 									Text(
 										text = "Pueblo o Ciudad",
-										fontSize = 14.sp,
+										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(10.dp,20.dp,10.dp,10.dp)
+									.padding(10.dp,20.dp,20.dp,10.dp)
 									.weight(1f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
@@ -406,23 +406,29 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
+						}
+						Row {
 							TextField(
 								value = Provincia.value,
 								onValueChange = { Provincia.value = it },
 								label = {
 									Text(
 										text = "Provincia",
-										fontSize = 14.sp,
+										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(10.dp,20.dp,10.dp,10.dp)
-									.weight(0.8f)
+									.padding(20.dp,10.dp,10.dp,10.dp)
+									.weight(0.7f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
@@ -431,8 +437,12 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 							TextField(
@@ -441,12 +451,12 @@ fun DatosDomicilio() {
 								label = {
 									Text(
 										text = "País",
-										fontSize = 14.sp,
+										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(10.dp,20.dp,10.dp,10.dp)
+									.padding(10.dp,10.dp,10.dp,10.dp)
 									.weight(0.5f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
@@ -456,8 +466,12 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 							TextField(
@@ -466,13 +480,13 @@ fun DatosDomicilio() {
 								label = {
 									Text(
 										text = "CP",
-										fontSize = 14.sp,
+										fontSize =  12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(10.dp,20.dp,10.dp,10.dp)
-									.weight(0.5f)
+									.padding(10.dp,10.dp,20.dp,10.dp)
+									.weight(0.2f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
@@ -481,20 +495,24 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 						}
 						// telefono particular | telefono trabajo | movil | fax
 						Row {
 							TextField(
-								value = TelefonoParticular.value,
-								onValueChange = { TelefonoParticular.value = it },
+								value = TelefonoPrincipal.value,
+								onValueChange = { TelefonoPrincipal.value = it },
 								label = {
 									Text(
-										text = "Teléfono Particular",
-										fontSize = 14.sp,
+										text = "Teléfono Principal",
+										fontSize =  12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
@@ -509,22 +527,26 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 							TextField(
-								value = TelefonoTrabajo.value,
-								onValueChange = { TelefonoTrabajo.value = it },
+								value = TelefonoAuxiliar.value,
+								onValueChange = { TelefonoAuxiliar.value = it },
 								label = {
 									Text(
-										text = "Teléfono Trabajo",
-										fontSize = 14.sp,
+										text = "Teléfono Auxiliar",
+										fontSize =  12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(10.dp)
+									.padding(10.dp,10.dp,20.dp,10.dp)
 									.weight(1.5f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
@@ -534,76 +556,29 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = Movil.value,
-								onValueChange = { Movil.value = it },
-								label = {
-									Text(
-										text = "Móvil",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									) },
-								modifier = Modifier
-									.padding(10.dp)
-									.weight(1f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = Fax.value,
-								onValueChange = { Fax.value = it },
-								label = {
-									Text(
-										text = "Fax",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									) },
-								modifier = Modifier
-									.padding(10.dp)
-									.weight(1f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 						}
-						// e-mai | web
 						Row {
 							TextField(
 								value = Email.value,
 								onValueChange = { Email.value = it },
 								label = {
 									Text(
-										text = "Correo",
-										fontSize = 14.sp,
+										text = "Correo Electronico",
+										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									) },
 								modifier = Modifier
-									.padding(20.dp,10.dp,10.dp,10.dp)
-									.weight(1.5f)
+									.padding(20.dp,10.dp,20.dp,20.dp)
+									.weight(1f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp,spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
@@ -612,33 +587,12 @@ fun DatosDomicilio() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = Web.value,
-								onValueChange = { Web.value = it },
-								label = {
-									Text(
-										text = "Web",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									) },
-								modifier = Modifier
-									.padding(10.dp)
-									.weight(1.5f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 						}
@@ -720,12 +674,7 @@ fun DatosDomicilio() {
 @Composable
 fun DatosBanco() {
 	//Datos Personales
-	var fechaNacimiento = remember { mutableStateOf("DD-MM-AAAA") }
-	var fechaAlta = remember { mutableStateOf("") }
-	var profesion = remember { mutableStateOf("") }
-	var hijos = remember { mutableStateOf("") }
-	var comodin = remember { mutableStateOf("") }
-	var pacientesDependientes = remember { mutableStateOf("") }
+	var IBAN = remember { mutableStateOf("") }
 	Card(
 		backgroundColor = White,
 		modifier = Modifier
@@ -738,7 +687,7 @@ fun DatosBanco() {
 			Box(modifier = Modifier.fillMaxWidth().height(35.dp).shadow(10.dp).background(Turquoise)) {
 				Text(
 					modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center),
-					text = "Datos personales",
+					text = "Datos Bancarios",
 					style = MaterialTheme.typography.h6,
 					color = White,
 					fontWeight = FontWeight.Bold
@@ -749,75 +698,18 @@ fun DatosBanco() {
 					Column(modifier = Modifier.weight(1f)) {
 						Row {
 							TextField(
-								value = fechaNacimiento.value,
-								onValueChange = { fechaNacimiento.value = it },
-								leadingIcon = {Icon(Icons.Filled.DateRange, "calendar", tint = Turquoise)},
+								value = IBAN.value,
+								onValueChange = { IBAN.value = it },
 								label = {
 									Text(
-										text = "Nacido en",
-										fontSize = 14.sp,
+										text = "IBAN",
+										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
 									)
 								},
 								modifier = Modifier
-									.padding(20.dp, 20.dp, 10.dp, 10.dp)
-									.width(160.dp)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = fechaAlta.value,
-								onValueChange = { fechaAlta.value = it },
-								leadingIcon = {Icon(Icons.Filled.DateRange, "calendar", tint = Turquoise)},
-								label = {
-									Text(
-										text = "Fecha Alta",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									)
-								},
-								modifier = Modifier
-									.padding(10.dp, 20.dp, 10.dp, 10.dp)
-									.width(160.dp)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
-								)
-							)
-							sexo()
-							grupoSanguineo()
-							estadoCivil()
-							TextField(
-								value = profesion.value,
-								onValueChange = { profesion.value = it },
-								label = {
-									Text(
-										text = "Profesión",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									)
-								},
-								modifier = Modifier
-									.padding(10.dp, 20.dp, 20.dp, 10.dp)
+									.padding(20.dp, 20.dp, 20.dp, 20.dp)
 									.weight(0.2f)
 									.fillMaxWidth()
 									.shadow(elevation = 20.dp, spotColor = Turquoise)
@@ -827,88 +719,12 @@ fun DatosBanco() {
 									backgroundColor = White,
 									focusedIndicatorColor = Turquoise,
 									cursorColor = Grey,
-									textColor = Black,
+									textColor = Dark2,
 									unfocusedIndicatorColor = White
-								)
-							)
-						}
-						Row {
-							TextField(
-								value = hijos.value,
-								onValueChange = { hijos.value = it },
-								label = {
-									Text(
-										text = "Hijos",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									)
-								},
-								modifier = Modifier
-									.padding(20.dp, 10.dp, 10.dp, 20.dp)
-									.weight(1f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = comodin.value,
-								onValueChange = { comodin.value = it },
-								label = {
-									Text(
-										text = "Comodín",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									)
-								},
-								modifier = Modifier
-									.padding(10.dp, 10.dp, 10.dp, 20.dp)
-									.weight(4f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
-								)
-							)
-							TextField(
-								value = pacientesDependientes.value,
-								onValueChange = { pacientesDependientes.value = it },
-								label = {
-									Text(
-										text = "Pacientes Dependientes",
-										fontSize = 14.sp,
-										fontWeight = FontWeight.Bold,
-										color = Turquoise
-									)
-								},
-								modifier = Modifier
-									.padding(10.dp, 10.dp, 20.dp, 20.dp)
-									.weight(2f)
-									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
-									.clip(shape = RoundedCornerShape(10.dp))
-									.height(50.dp),
-								colors = TextFieldDefaults.textFieldColors(
-									backgroundColor = White,
-									focusedIndicatorColor = Turquoise,
-									cursorColor = Grey,
-									textColor = Black,
-									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
 								)
 							)
 						}
@@ -1010,7 +826,7 @@ fun sexo() {
 					Text(text = selectionOption,
 						fontWeight = FontWeight.Bold,
 						fontSize = 14.sp,
-						color = Dark2)
+						color = Turquoise)
 				}
 			}
 		}
