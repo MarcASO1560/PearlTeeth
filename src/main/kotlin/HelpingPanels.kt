@@ -8,6 +8,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Button
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -30,13 +32,15 @@ fun CalendarOverlay(
 			.background(color = TransparentBlack)
 			.onClick {
 				onOverlayAction.invoke()
+				onOverlayDismiss.invoke()
 					 },
 		contentAlignment = Alignment.Center
 	) {
-		Column {
+		Column(modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)) {
 			ButtonClear(
 				onClick = {
 					onOverlayDismiss.invoke()
+					onOverlayAction.invoke()
 				}
 			)
 			Box(modifier = Modifier.shadow(elevation = 30.dp,spotColor = Black).size(650.dp,550.dp).clip(shape = RoundedCornerShape(15.dp))){
@@ -49,7 +53,7 @@ fun CalendarOverlay(
 		}
 	}
 }
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun LoginOverlay(
 	onOverlayDismiss: () -> Unit,
@@ -60,14 +64,24 @@ fun LoginOverlay(
 			.fillMaxSize()
 			.background(color = TransparentBlack)
 			.onClick { "jaja" },
-		contentAlignment = Alignment.Center
 	) {
-		ButtonClear(
-			onClick = {
-				onOverlayDismiss.invoke()
-				onOverlayAction.invoke()
-			}
-		)
+		Column {
+			ButtonClear(
+				onClick = {
+					onOverlayDismiss.invoke()
+					onOverlayAction.invoke()
+				}
+			)
+			Card(
+				elevation = 3.dp,
+				modifier = Modifier
+					.padding(30.dp,10.dp,30.dp,30.dp)
+					.wrapContentSize(Alignment.Center)
+					.fillMaxSize()
+					.shadow(elevation = 10.dp, spotColor = Grey)
+					.clip(shape = RoundedCornerShape(30.dp)),
+			){}
+		}
 	}
 }
 
@@ -76,7 +90,7 @@ fun ButtonClear(onClick: () -> Unit){
 	Button(
 		onClick = onClick,
 		modifier = Modifier
-			.padding(0.dp,0.dp,0.dp,20.dp)
+			.padding(20.dp)
 			.width(650.dp)
 			.wrapContentSize(align = Alignment.TopEnd)
 			.shadow(elevation = 60.dp,spotColor = Black)

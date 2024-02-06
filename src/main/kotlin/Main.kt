@@ -44,11 +44,9 @@ fun menu(onClose: () -> Unit) {
                 }
                 val currentShowOverlay by rememberUpdatedState(showOverlay.value)
                 if (currentShowOverlay) {
-                    // Llamada a CalendarOverlay desde el main
                     CalendarOverlay(
                         selectedDateState = selectedDateState,
                         onOverlayDismiss = {
-                            // Lógica que se ejecutará cuando se cierre el overlay
                             showOverlay.value = false
                         },
                         onOverlayAction = {},

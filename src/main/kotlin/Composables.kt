@@ -1,7 +1,7 @@
+import PearlTeethDB.MainD
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -10,26 +10,21 @@ import androidx.compose.material.*
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.rounded.AccountBox
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import java.time.LocalDate
@@ -352,7 +347,17 @@ fun TopBar(onMenuClick: () -> Unit) {
                         contentDescription = "arrow2"
                     )
                 }
-                Text(text = textoTituloPanel.value, color = White, fontSize = 16.sp, fontWeight = FontWeight.Bold,modifier = Modifier.padding(25.dp,0.dp,0.dp,0.dp).fillMaxHeight().wrapContentSize(align = Alignment.Center))
+                Text(
+                    text = textoTituloPanel.value,
+                    color = White, fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(25.dp,0.dp,0.dp,0.dp)
+                        .fillMaxHeight()
+                        .wrapContentSize(
+                            align = Alignment.Center
+                        )
+                )
             }
             Row(
                 modifier = Modifier
@@ -410,164 +415,8 @@ fun LoginPage(onClose: () -> Unit) {
     val state = WindowState(width = 500.dp, height = 700.dp)
     var visibility by remember { mutableStateOf(true) }
     var isMaxScreen by remember { mutableStateOf(false) }
-    Window(onCloseRequest = { onClose.invoke() }, title = "Login", visible = visibility, state = state, icon = icon, resizable = false) {
+    Window(onCloseRequest = { onClose.invoke();MainD.desconecta() }, title = "Login", visible = visibility, state = state, icon = icon, resizable = false) {
         Scaffold(
-            topBar =
-            {
-                Box(
-                    modifier = Modifier
-                        .shadow(150.dp)
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .clip(shape = RoundedCornerShape(0.dp,0.dp,250.dp,250.dp))
-                        .background(TurquoiseLite)
-                )
-                val image = painterResource("drawable/PearlTeethIcon.png")
-                Column(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxSize()
-                        .wrapContentSize(Alignment.TopCenter)
-                ){
-                    Image(
-                        painter = image,
-                        contentDescription = "Icon",
-                        modifier = Modifier
-                            .size(140.dp)
-                            .padding(20.dp)
-                            .align(Alignment.CenterHorizontally)
-                            .shadow(40.dp)
-                    )
-                    Card(elevation = 6.dp, modifier = Modifier
-                        .padding(30.dp)
-                        .wrapContentSize(Alignment.Center)
-                        .fillMaxSize()
-                        .shadow(50.dp)
-                        .clip(shape = RoundedCornerShape(40.dp)),
-                    ){
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .wrapContentSize(Alignment.TopCenter)
-                                .padding(20.dp)
-                        ){
-                            Text(
-                                text = "Welcome",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .wrapContentSize(Alignment.Center))
-                            var Mail = remember { mutableStateOf("") }
-                            var Password = remember { mutableStateOf("") }
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .wrapContentSize(Alignment.Center)
-                            ){
-                                Column {
-                                    TextField(
-                                        value = Mail.value,
-                                        onValueChange = { Mail.value = it },
-                                        label = {
-                                            Text(
-                                                text = "Username",
-                                                fontWeight = FontWeight.Bold,
-                                                color = LightBlue
-                                            ) },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(10.dp)
-                                            .shadow(30.dp)
-                                            .clip(shape = RoundedCornerShape(15.dp))
-                                            .height(60.dp),
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            backgroundColor = White,
-                                            focusedIndicatorColor = LightBlue,
-                                            cursorColor = Grey,
-                                            textColor = Grey,
-                                            unfocusedIndicatorColor = LightBlue
-                                        )
-                                    )
-                                    var passwordVisible by rememberSaveable { mutableStateOf(false) }
-                                    TextField(
-                                        value = Password.value,
-                                        onValueChange = { Password.value = it },
-                                        label = {
-                                            Text(
-                                                text = "Password",
-                                                fontWeight = FontWeight.Bold,
-                                                color = LightBlue
-                                            ) },
-                                        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                                        trailingIcon = {
-                                            val image = if (passwordVisible)
-                                                Icons.Filled.Lock
-                                            else Icons.Filled.Close
-
-                                            val description = if (passwordVisible) "Hide password" else "Show password"
-
-                                            IconButton(onClick = {passwordVisible = !passwordVisible}){
-                                                Icon(imageVector  = image, description)
-                                            }
-                                        },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(10.dp)
-                                            .shadow(30.dp)
-                                            .clip(shape = RoundedCornerShape(15.dp))
-                                            .height(60.dp),
-                                        colors = TextFieldDefaults.textFieldColors(
-                                            backgroundColor = White,
-                                            focusedIndicatorColor = LightBlue,
-                                            cursorColor = Grey,
-                                            textColor = Grey,
-                                            unfocusedIndicatorColor = LightBlue
-                                        )
-                                    )
-                                    var isSecondWindowOpen by remember { mutableStateOf(false) }
-                                    Button(
-                                        onClick = {
-                                            if (validateFields(Mail.value, Password.value)) {
-                                                // Aquí puedes realizar la lógica de inicio de sesión
-                                                isSecondWindowOpen = true
-                                                isMaxScreen = !isMaxScreen
-                                            } else {
-                                            }
-                                        },
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(80.dp)
-                                            .padding(30.dp,15.dp,30.dp,15.dp)
-                                            .clip(shape = RoundedCornerShape(20.dp)),
-                                        colors = ButtonDefaults.buttonColors(backgroundColor = Turquoise)
-                                    ){
-                                        Text(
-                                            text = "Login",
-                                            fontSize = 20.sp,
-                                            color = White,
-                                            fontWeight = FontWeight.Bold,
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .wrapContentSize(Alignment.Center)
-                                        )
-                                    }
-                                    if (isSecondWindowOpen) {
-                                        menu(
-                                            onClose = {
-                                                isSecondWindowOpen = false
-                                                visibility = true
-                                            }
-                                        )
-                                        visibility = false
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             content = { padding ->
                 Surface(
                     modifier = Modifier
@@ -575,6 +424,199 @@ fun LoginPage(onClose: () -> Unit) {
                         .padding(padding),
                     color = White
                 ){
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(1f)
+                                .clip(shape = RoundedCornerShape(0.dp,0.dp,250.dp,250.dp))
+                                .shadow(150.dp)
+                                .background(TurquoiseLite)
+                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .weight(0.7f)
+                        )
+                    }
+                    val image = painterResource("drawable/PearlTeethIcon.png")
+                    Column(
+                        modifier = Modifier
+                            .padding(20.dp)
+                            .fillMaxSize()
+                            .wrapContentSize(Alignment.TopCenter)
+                    ){
+                        Image(
+                            painter = image,
+                            contentDescription = "Icon",
+                            modifier = Modifier
+                                .size(140.dp)
+                                .padding(20.dp)
+                                .align(Alignment.CenterHorizontally)
+                                .shadow(40.dp)
+                        )
+                        Card(elevation = 6.dp, modifier = Modifier
+                            .padding(30.dp)
+                            .wrapContentSize(Alignment.Center)
+                            .fillMaxSize()
+                            .shadow(50.dp)
+                            .clip(shape = RoundedCornerShape(40.dp)),
+                        ){
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .wrapContentSize(Alignment.TopCenter)
+                                    .padding(20.dp)
+                            ){
+                                Text(
+                                    text = "Welcome",
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentSize(Alignment.Center))
+                                var Mail = remember { mutableStateOf("") }
+                                var Password = remember { mutableStateOf("") }
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .wrapContentSize(Alignment.Center)
+                                ){
+                                    Column {
+                                        TextField(
+                                            value = Mail.value,
+                                            onValueChange = { Mail.value = it },
+                                            leadingIcon = {
+                                                Icon(
+                                                    imageVector = Icons.Filled.AccountCircle,
+                                                    contentDescription = null
+                                                )
+                                            },
+                                            label = {
+                                                Text(
+                                                    text = "Username",
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Black
+                                                ) },
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(10.dp)
+                                                .shadow(30.dp)
+                                                .clip(shape = RoundedCornerShape(15.dp))
+                                                .height(60.dp),
+                                            colors = TextFieldDefaults.textFieldColors(
+                                                backgroundColor = White,
+                                                focusedIndicatorColor = LightBlue,
+                                                cursorColor = Grey,
+                                                textColor = Black,
+                                                unfocusedIndicatorColor = White
+                                            ),
+                                            textStyle = TextStyle(
+                                                fontSize = 16.sp
+                                            )
+                                        )
+                                        val visibilityOn = painterResource("drawable/baseline_visibility_black_48.png")
+                                        val visibilityOff = painterResource("drawable/baseline_visibility_off_black_48.png")
+                                        var passwordVisible by rememberSaveable { mutableStateOf(false) }
+                                        TextField(
+                                            value = Password.value,
+                                            onValueChange = { Password.value = it },
+                                            leadingIcon = {
+                                                Icon(
+                                                    imageVector = Icons.Filled.Lock,
+                                                    contentDescription = null
+                                                )
+                                            },
+                                            label = {
+                                                Text(
+                                                    text = "Password",
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Black
+                                                ) },
+                                            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                                            trailingIcon = {
+                                                val icon = if (passwordVisible) visibilityOn else visibilityOff
+                                                val description = if (passwordVisible) "Hide password" else "Show password"
+
+                                                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                                                    Icon(
+                                                        painter = icon,
+                                                        contentDescription = description,
+                                                        modifier = Modifier
+                                                            .size(26.dp) // Ajusta el tamaño según tus necesidades
+                                                            .alpha(0.5f) // Ajusta el nivel de transparencia (0.0f a 1.0f)
+                                                    )
+                                                }
+                                            },
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(10.dp)
+                                                .shadow(30.dp)
+                                                .clip(shape = RoundedCornerShape(15.dp))
+                                                .height(60.dp),
+                                            colors = TextFieldDefaults.textFieldColors(
+                                                backgroundColor = White,
+                                                focusedIndicatorColor = LightBlue,
+                                                cursorColor = Grey,
+                                                textColor = Black,
+                                                unfocusedIndicatorColor = White
+                                            ),
+                                            textStyle = TextStyle(
+                                                fontSize = 16.sp
+                                            )
+                                        )
+
+                                        var isSecondWindowOpen by remember { mutableStateOf(false) }
+                                        Button(
+                                            onClick = {
+                                                if (validateFieldsLogin(Mail.value, Password.value)) {
+                                                    isSecondWindowOpen = true
+                                                    isMaxScreen = !isMaxScreen
+                                                } else {
+                                                    showOverlay.value = true
+                                                }
+                                            },
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(80.dp)
+                                                .padding(30.dp,15.dp,30.dp,15.dp)
+                                                .clip(shape = RoundedCornerShape(20.dp)),
+                                            colors = ButtonDefaults.buttonColors(backgroundColor = Turquoise)
+                                        ){
+                                            Text(
+                                                text = "Login",
+                                                fontSize = 20.sp,
+                                                color = White,
+                                                fontWeight = FontWeight.Bold,
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .wrapContentSize(Alignment.Center)
+                                            )
+                                        }
+                                        if (isSecondWindowOpen) {
+                                            menu(
+                                                onClose = {
+                                                    isSecondWindowOpen = false
+                                                    visibility = true
+                                                }
+                                            )
+                                            visibility = false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                val currentShowOverlay by rememberUpdatedState(showOverlay.value)
+                if (currentShowOverlay) {
+                    LoginOverlay(
+                        onOverlayDismiss = {
+                            showOverlay.value = false
+                        },
+                        onOverlayAction = {},
+                    )
                 }
             }
         )

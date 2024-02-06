@@ -228,7 +228,7 @@ fun DatePicker(
 			.height(50.dp)
 	) {
 		Row(
-			verticalAlignment = Alignment.CenterVertically,
+			verticalAlignment = CenterVertically,
 			modifier = Modifier
 				.fillMaxWidth()
 				.padding(horizontal = 8.dp)
@@ -313,7 +313,6 @@ private fun isValidDate(day: String, month: String, year: String): Boolean {
 	val dayInt = day.toIntOrNull()
 	val monthInt = month.toIntOrNull()
 	val yearInt = year.toIntOrNull()
-
 	// Verificar si day, month y year son enteros no nulos
 	if (dayInt != null && monthInt != null && yearInt != null) {
 		// Verificar rangos válidos para día, mes y año
@@ -323,7 +322,6 @@ private fun isValidDate(day: String, month: String, year: String): Boolean {
 			return dayInt <= daysInMonth
 		}
 	}
-
 	return false
 }
 

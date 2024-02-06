@@ -17,6 +17,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.compose.material3:material3-desktop:1.2.1")
     implementation(compose.desktop.currentOs)
+    implementation("mysql:mysql-connector-java:8.0.19")
 }
 
 compose.desktop {
