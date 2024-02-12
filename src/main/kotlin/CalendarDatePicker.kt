@@ -24,7 +24,8 @@ import java.time.Month
 fun Schedule2(
 	initialDay: String,
 	initialMonth: Int,
-	initialYear: String
+	initialYear: String,
+	onDaySelected: (LocalDate) -> Unit
 ) {
 	// Agrega esta función a tu código
 	fun getSpanishMonthName(month: Month): String {
@@ -98,12 +99,12 @@ fun Schedule2(
 					IconButton(
 						onClick = {
 							// Función para retroceder un mes
-								if (selectedMonth == 1){
-									selectedMonth = selectedMonth + 11
-									selectedYear = (selectedYear.toInt() - 1).toString()
-								} else {
-									selectedMonth = selectedMonth.minus(1)
-								}
+							if (selectedMonth == 1){
+								selectedMonth = selectedMonth + 11
+								selectedYear = (selectedYear.toInt() - 1).toString()
+							} else {
+								selectedMonth = selectedMonth.minus(1)
+							}
 							updateDaysMatrix()
 						},
 						modifier = Modifier.size(48.dp)
@@ -265,11 +266,11 @@ fun Schedule2(
 									.clip(shape = RoundedCornerShape(10.dp))
 									.clickable {
 										if (dayInfo.isClickable) {
-											val selectedMonth = getSpanishMonthName(selectedDateState.month)
-											val currentMonthText = getSpanishMonthName(dayInfo.month)
-											if (currentMonthText == selectedMonth) {
-												selectedDay = dayInfo.toString()
+											if (dayInfo.isClickable) {
+												selectedDateState = LocalDate.of(dayInfo.year, dayInfo.month, dayInfo.day)
+												selectedDay = dayInfo.day.toString()
 												updateDaysMatrix()
+												onDaySelected(selectedDateState)
 											}
 										}
 									},

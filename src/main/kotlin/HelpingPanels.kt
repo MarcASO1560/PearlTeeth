@@ -9,51 +9,89 @@ import androidx.compose.material.Button
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.Text
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import java.time.LocalDate
 
-
+interface DateSelectionListener {
+	fun onDateSelected(selectedDate: LocalDate)
+}
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CalendarOverlay(
-	selectedDateState: DateState,
+	initialSelectedDate: LocalDate,
 	onOverlayDismiss: () -> Unit,
-	onOverlayAction: () -> Unit,
-){
+	dateSelectionListener: DateSelectionListener
+) {
+	var selectedDate by remember { mutableStateOf(initialSelectedDate) }
+	var datePickerText by remember { mutableStateOf("${selectedDate.dayOfMonth}/${selectedDate.monthValue}/${selectedDate.year}") }
+
 	Box(
 		modifier = Modifier
 			.fillMaxSize()
 			.background(color = TransparentBlack)
 			.onClick {
-				onOverlayAction.invoke()
-				onOverlayDismiss.invoke()
-					 },
+
+			},
 		contentAlignment = Alignment.Center
 	) {
 		Column(modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center)) {
 			ButtonClear(
 				onClick = {
 					onOverlayDismiss.invoke()
-					onOverlayAction.invoke()
 				}
 			)
-			Box(modifier = Modifier.shadow(elevation = 30.dp,spotColor = Black).size(650.dp,550.dp).clip(shape = RoundedCornerShape(15.dp))){
+			Box(modifier = Modifier.shadow(elevation = 30.dp).size(650.dp,550.dp).clip(shape = RoundedCornerShape(15.dp))){
 				Schedule2(
-					initialDay = selectedDateState.day,
-					initialMonth = selectedDateState.month.toInt(),
-					initialYear = selectedDateState.year
+					initialDay = selectedDate.dayOfMonth.toString(),
+					initialMonth = selectedDate.monthValue,
+					initialYear = selectedDate.year.toString(),
+					onDaySelected = { newDate ->
+						// Actualiza la fecha localmente dentro del overlay, pero no globalmente.
+						selectedDate = newDate
+					}
 				)
+			}
+			Box(
+				modifier = Modifier.width(650.dp)
+			){
+				Button(
+					onClick = {
+						dateSelectionListener.onDateSelected(selectedDate)
+						onOverlayDismiss.invoke()
+					},
+					modifier = Modifier
+						.fillMaxWidth()
+						.wrapContentSize(align = Alignment.Center)
+						.padding(15.dp)
+						.width(150.dp)
+						.shadow(elevation = 30.dp, spotColor = LightBlue)
+						.clip(shape = RoundedCornerShape(15.dp)),
+					colors = ButtonDefaults.buttonColors(
+						backgroundColor = LightBlue)
+				) {
+					Text(
+						text = "Aplicar",
+						fontSize = 16.sp,
+						color = White,
+						fontWeight = FontWeight.Bold,
+						modifier = Modifier.padding(10.dp).fillMaxWidth()
+							.wrapContentSize(Alignment.Center)
+					)
+				}
 			}
 		}
 	}
 }
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun LoginOverlay(
 	onOverlayDismiss: () -> Unit,

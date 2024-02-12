@@ -6,11 +6,12 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.window.*
 import java.awt.Dimension
 import java.time.LocalDate
+
 var textoTituloPanel = mutableStateOf("Menu principal")
+var selectedDateGlobal = mutableStateOf(LocalDate.now())
 @Composable
-fun menu(onClose: () -> Unit) {
+fun menu(onClose: () -> Unit, updateSelectedDate: (LocalDate) -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
-    var isOverlayVisible by remember { mutableStateOf(false) }
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
     )
@@ -33,36 +34,38 @@ fun menu(onClose: () -> Unit) {
                     color = Bright1
                 ){
                     Column {
-                        TopBar(onMenuClick = { isOverlayVisible = true })
+                        TopBar(onMenuClick = { showOverlay2.value = true })
                         Row {
                             SideBar { section ->
                                 currentSection = section
                             }
-                            myPage(currentSection)
+                            myPage(currentSection,updateSelectedDate)
                         }
                     }
                 }
-                val currentShowOverlay by rememberUpdatedState(showOverlay.value)
-                if (currentShowOverlay) {
-                    CalendarOverlay(
-                        selectedDateState = selectedDateState,
-                        onOverlayDismiss = {
-                            showOverlay.value = false
-                        },
-                        onOverlayAction = {},
-                    )
-                }
-            }
+            },
         )
+        // Mostrar el overlay cuando showOverlay es true
+        if (showOverlay.value) {
+            CalendarOverlay(
+                initialSelectedDate = selectedDateGlobal.value,
+                onOverlayDismiss = { showOverlay.value = false },
+                dateSelectionListener = object : DateSelectionListener {
+                    override fun onDateSelected(newDate: LocalDate) {
+                        selectedDateGlobal.value = newDate // Actualiza el estado global
+                    }
+                }
+            )
+        }
     }
 }
 @Composable
-fun myPage(currentSection: Section) {
+fun myPage(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
     when (currentSection) {
-        Section.HOME -> Content(currentSection = Section.HOME)
-        Section.CALENDAR -> Content(currentSection = Section.CALENDAR)
-        Section.FILIAR -> Content(currentSection = Section.FILIAR)
-        Section.PATIENTS -> Content(currentSection = Section.PATIENTS)
+        Section.HOME -> Content(currentSection = Section.HOME, updateSelectedDate = updateSelectedDate)
+        Section.CALENDAR -> Content(currentSection = Section.CALENDAR, updateSelectedDate = updateSelectedDate)
+        Section.FILIAR -> Content(currentSection = Section.FILIAR, updateSelectedDate = updateSelectedDate)
+        Section.PATIENTS -> Content(currentSection = Section.PATIENTS, updateSelectedDate = updateSelectedDate)
     }
 }
 enum class Section {

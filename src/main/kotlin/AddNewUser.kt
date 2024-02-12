@@ -1,11 +1,8 @@
 import androidx.compose.foundation.*
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -15,37 +12,46 @@ import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.Alignment.Companion.CenterVertically
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.awt.Color
-import java.lang.module.ModuleFinder
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Month
+import androidx.compose.runtime.mutableStateOf
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
 val showOverlay = mutableStateOf(false)
+val showOverlay2 = mutableStateOf(false)
+
+fun updateSelectedDate(newDate: String) {
+	// Convierte la cadena de fecha en LocalDate
+	val date = LocalDate.parse(newDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+	// Actualiza el estado que el DatePicker está observando
+	selectedDate = date
+}
 @Composable
-fun Filiar() {
-	var selectedDate by remember { mutableStateOf(LocalDate.now()) }
-	var isOverlayVisible by remember { mutableStateOf(false) }
+fun Filiar(updateSelectedDate: (LocalDate) -> Unit) {
+	var showCalendarOverlay by remember { mutableStateOf(false) }
+	var showLoginOverlay by remember { mutableStateOf(false) }
+
+	if (showCalendarOverlay) {
+		menu(onClose = {}, updateSelectedDate = updateSelectedDate)
+	}
+	if (showLoginOverlay) {
+		LoginOverlay(
+			onOverlayDismiss = { showLoginOverlay = false },
+			onOverlayAction = { /* Acción al aplicar */ }
+		)
+	}
 	Box(
 		modifier = Modifier.fillMaxSize()
-			.padding(10.dp,10.dp,10.dp,10.dp)
+			.padding(10.dp, 10.dp, 10.dp, 10.dp)
 			.background(color = White)
 	) {
 
@@ -57,13 +63,7 @@ fun Filiar() {
 		) {
 			item {
 				DatosAdministrativos(
-					onCalendarClick = {
-						isOverlayVisible = true
-					},
-					selectedDate = selectedDate,
-					onDateSelected = { date ->
-						selectedDate = date
-					}
+					setShowOverlay = { showOverlay.value = it }
 				)
 			}
 			item {
@@ -81,9 +81,11 @@ fun Filiar() {
 		)
 	}
 }
-var selectedDateState by mutableStateOf(DateState("16", "7", "2003"))
+
 @Composable
-fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, onDateSelected: (LocalDate) -> Unit) {
+fun DatosAdministrativos(
+	setShowOverlay: (Boolean) -> Unit,
+) {
 	//Datos administrativos
 	var nombre = remember { mutableStateOf("") }
 	var apellidos = remember { mutableStateOf("") }
@@ -92,14 +94,22 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 	Card(
 		backgroundColor = White,
 		modifier = Modifier
-			.padding(8.dp,20.dp,20.dp,8.dp)
+			.padding(8.dp, 20.dp, 20.dp, 8.dp)
 			.fillMaxWidth()
 			.wrapContentSize(align = Alignment.Center)
 			.clip(shape = RoundedCornerShape(20.dp))
 	) {
 		Column {
-			Box(modifier = Modifier.fillMaxWidth().height(35.dp).shadow(10.dp).background(Turquoise)){
-				Text(modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center), text = "Datos Administrativos", style = MaterialTheme.typography.h6,color = White,fontWeight = FontWeight.Bold)
+			Box(
+				modifier = Modifier.fillMaxWidth().height(35.dp).shadow(10.dp).background(Turquoise)
+			) {
+				Text(
+					modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center),
+					text = "Datos Administrativos",
+					style = MaterialTheme.typography.h6,
+					color = White,
+					fontWeight = FontWeight.Bold
+				)
 			}
 			Column {
 				Row {
@@ -114,14 +124,14 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
-									) },
-								onValueChange = {
-									nombre.value = it },
+									)
+								},
+								onValueChange = { nombre.value = it },
 								modifier = Modifier
-									.padding(20.dp,20.dp,10.dp,10.dp)
+									.padding(20.dp, 20.dp, 10.dp, 10.dp)
 									.weight(0.8f)
 									.fillMaxWidth()
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
+									.shadow(elevation = 20.dp, spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
 									.height(50.dp),
 								colors = TextFieldDefaults.textFieldColors(
@@ -145,12 +155,13 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
-									) },
+									)
+								},
 								modifier = Modifier
-									.padding(10.dp,20.dp,10.dp,10.dp)
+									.padding(10.dp, 20.dp, 10.dp, 10.dp)
 									.weight(0.8f)
 									.fillMaxWidth()
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
+									.shadow(elevation = 20.dp, spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
 									.height(50.dp),
 								colors = TextFieldDefaults.textFieldColors(
@@ -175,11 +186,12 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
-									) },
+									)
+								},
 								modifier = Modifier
-									.padding(10.dp,20.dp,20.dp,10.dp)
+									.padding(10.dp, 20.dp, 20.dp, 10.dp)
 									.weight(0.5f)
-									.shadow(elevation = 20.dp,spotColor = Turquoise)
+									.shadow(elevation = 20.dp, spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
 									.height(50.dp),
 								colors = TextFieldDefaults.textFieldColors(
@@ -197,11 +209,8 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 						}
 						Row {
 							DatePicker(
-								title = "Selecciona una fecha",
-								selectedDateState = selectedDateState,
-								onDateSelected = { dateState ->
-									selectedDateState = dateState
-								}
+								title = "Seleccione una fecha",
+								setShowOverlay = { show -> setShowOverlay(show) }
 							)
 							sexo()
 						}
@@ -211,13 +220,21 @@ fun DatosAdministrativos(onCalendarClick: () -> Unit, selectedDate: LocalDate, o
 		}
 	}
 }
-class DateState(var day: String, var month: String, var year: String)
+
 @Composable
 fun DatePicker(
 	title: String,
-	selectedDateState: DateState,
-	onDateSelected: (DateState) -> Unit
+	setShowOverlay: (Boolean) -> Unit
 ) {
+	// Estado para el texto mostrado en el TextField, inicializado con la fecha actual formateada
+	var textDate by remember { mutableStateOf(selectedDateGlobal.value.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))) }
+
+	LaunchedEffect(selectedDateGlobal.value) {
+		textDate = selectedDateGlobal.value.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+	}
+
+
+	// UI para el DatePicker
 	Box(
 		modifier = Modifier
 			.padding(20.dp, 10.dp, 10.dp, 20.dp)
@@ -228,54 +245,34 @@ fun DatePicker(
 			.height(50.dp)
 	) {
 		Row(
-			verticalAlignment = CenterVertically,
+			verticalAlignment = Alignment.CenterVertically,
 			modifier = Modifier
 				.fillMaxWidth()
 				.padding(horizontal = 8.dp)
 		) {
-			IconButton(onClick = {
-				showOverlay.value = true
-			}) {
+			IconButton(onClick = { setShowOverlay(true) }) {
 				Icon(
 					Icons.Filled.DateRange,
 					tint = Turquoise,
 					modifier = Modifier.background(White),
-					contentDescription = "CalendarDatePicker"
+					contentDescription = "Select Date"
 				)
 			}
-
 			TextField(
-				value = "${selectedDateState.day}/${selectedDateState.month}/${selectedDateState.year}",
-				onValueChange = { newInput ->
-					try {
-						val onlyNumbersAndSlashes = newInput.filter { char ->
-							char.isDigit() || char == '/'
-						}
-
-						// Contar las barras presentes en la entrada
-						val slashCount = onlyNumbersAndSlashes.count { it == '/' }
-
-						if (slashCount <= 2) {
-							val components = onlyNumbersAndSlashes.split("/")
-
-							selectedDateState.day = components.getOrNull(0) ?: ""
-							selectedDateState.month = components.getOrNull(1) ?: ""
-							selectedDateState.year = components.getOrNull(2) ?: ""
-
-							// Validar los componentes sin lanzar excepciones
-							if (isValidDate(
-									selectedDateState.day,
-									selectedDateState.month,
-									selectedDateState.year
-								)
-							) {
-								onDateSelected(selectedDateState)
+				value = textDate,
+				onValueChange = { newValue ->
+					// Permite solo caracteres numéricos y el separador '/'
+					if (newValue.matches("^\\d{0,2}/?\\d{0,2}/?\\d{0,4}\$".toRegex())) {
+						textDate = newValue
+						// Intenta actualizar la fecha solo si el formato es completo y correcto
+						if (newValue.matches("^\\d{2}/\\d{2}/\\d{4}\$".toRegex())) {
+							try {
+								val parsedDate = LocalDate.parse(newValue, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+								selectedDateGlobal.value = parsedDate
+							} catch (e: DateTimeParseException) {
+								// Manejar el error de formato, si es necesario
 							}
 						}
-					} catch (e: Exception) {
-						// Manejar el error sin cerrar el programa
-						// Puedes mostrar un mensaje de error al usuario o realizar otras acciones
-						println("Error al procesar la fecha: ${e.message}")
 					}
 				},
 				label = {
@@ -284,47 +281,25 @@ fun DatePicker(
 						fontSize = 12.sp,
 						fontWeight = FontWeight.Bold,
 						color = Turquoise
-					)
-				},
+					) },
+				modifier = Modifier.weight(1f),
 				colors = TextFieldDefaults.textFieldColors(
 					backgroundColor = White,
 					focusedIndicatorColor = Turquoise,
+					unfocusedIndicatorColor = White,
 					cursorColor = Grey,
-					textColor = Dark2,
-					unfocusedIndicatorColor = White
+					textColor = Dark1
 				),
 				textStyle = TextStyle(
 					fontWeight = FontWeight.Bold,
 					fontSize = 16.sp
 				),
-				keyboardOptions = KeyboardOptions.Default.copy(
-					keyboardType = KeyboardType.Number
-				),
-				keyboardActions = KeyboardActions(
-					onDone = {
-						// Puedes manejar la acción "Done" si es necesario
-					}
-				)
+				keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+				singleLine = true
 			)
 		}
 	}
 }
-private fun isValidDate(day: String, month: String, year: String): Boolean {
-	val dayInt = day.toIntOrNull()
-	val monthInt = month.toIntOrNull()
-	val yearInt = year.toIntOrNull()
-	// Verificar si day, month y year son enteros no nulos
-	if (dayInt != null && monthInt != null && yearInt != null) {
-		// Verificar rangos válidos para día, mes y año
-		if (dayInt in 1..31 && monthInt in 1..12 && yearInt > 0) {
-			// Verificar si el día es válido para el mes específico (ten en cuenta años bisiestos)
-			val daysInMonth = YearMonth.of(yearInt, monthInt).lengthOfMonth()
-			return dayInt <= daysInMonth
-		}
-	}
-	return false
-}
-
 @Composable
 fun DatosDomicilio() {
 	//Datos de Domicilio

@@ -160,7 +160,7 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
 }
 @Preview
 @Composable
-fun Content(currentSection: Section) {
+fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
     val image = painterResource("drawable/PearlTeethIcon.png")
     Box(
         modifier = Modifier
@@ -235,7 +235,7 @@ fun Content(currentSection: Section) {
                         .shadow(elevation = 30.dp,spotColor = Grey)
                         .clip(shape = RoundedCornerShape(15.dp)),
                     ){
-                        Filiar()
+                        Filiar(updateSelectedDate = { /* Acción al actualizar la fecha */ })
                     }
                     Card (elevation = 3.dp, modifier = Modifier
                         .padding(30.dp,0.dp,30.dp,30.dp)
@@ -574,7 +574,7 @@ fun LoginPage(onClose: () -> Unit) {
                                                     isSecondWindowOpen = true
                                                     isMaxScreen = !isMaxScreen
                                                 } else {
-                                                    showOverlay.value = true
+                                                    showOverlay2.value = true
                                                 }
                                             },
                                             modifier = Modifier
@@ -599,6 +599,9 @@ fun LoginPage(onClose: () -> Unit) {
                                                 onClose = {
                                                     isSecondWindowOpen = false
                                                     visibility = true
+                                                },
+                                                updateSelectedDate = { newDate ->
+                                                    println("Nueva fecha seleccionada: $newDate")
                                                 }
                                             )
                                             visibility = false
@@ -609,11 +612,11 @@ fun LoginPage(onClose: () -> Unit) {
                         }
                     }
                 }
-                val currentShowOverlay by rememberUpdatedState(showOverlay.value)
+                val currentShowOverlay by rememberUpdatedState(showOverlay2.value)
                 if (currentShowOverlay) {
                     LoginOverlay(
                         onOverlayDismiss = {
-                            showOverlay.value = false
+                            showOverlay2.value = false
                         },
                         onOverlayAction = {},
                     )
