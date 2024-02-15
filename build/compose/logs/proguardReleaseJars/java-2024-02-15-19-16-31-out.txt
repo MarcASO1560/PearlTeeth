@@ -1,0 +1,245 @@
+ProGuard, version 7.2.2
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: there were 26 duplicate class definitions.
+      (https://www.guardsquare.com/proguard/manual/troubleshooting#duplicateclass)
+Note: org.jetbrains.skiko.ReflectionUtil$findAssignableField$result$1 calls 'Field.getType'
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find superclass or interface com.microsoft.azure.keyvault.authentication.KeyVaultCredentials
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find superclass or interface org.antlr.v4.runtime.BaseErrorListener
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find superclass or interface org.antlr.v4.runtime.Lexer
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find superclass or interface org.osgi.framework.BundleActivator
+Warning: com.microsoft.sqlserver.jdbc.osgi.SQLServerDataSourceFactory: can't find superclass or interface org.osgi.service.jdbc.DataSourceFactory
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonParser
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonParser
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonElement
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.AASAttestationResponse: can't find referenced class com.google.gson.JsonObject
+Warning: com.microsoft.sqlserver.jdbc.JWTCertificateEntry: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.JWTCertificateEntry: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.JWTCertificateEntry: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.JWTCertificateEntry: can't find referenced class com.google.gson.JsonArray
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.azure.keyvault.authentication.KeyVaultCredentials
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.ClientCredential
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.ClientCredential
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.azure.keyvault.authentication.KeyVaultCredentials
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.ClientCredential
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.KeyVaultCredential: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerADAL4JUtils: can't find referenced class com.microsoft.aad.adal4j.AuthenticationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerBouncyCastleLoader: can't find referenced class org.bouncycastle.jce.provider.BouncyCastleProvider
+Warning: com.microsoft.sqlserver.jdbc.SQLServerBouncyCastleLoader: can't find referenced class org.bouncycastle.jce.provider.BouncyCastleProvider
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class okhttp3.OkHttpClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class okhttp3.OkHttpClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class retrofit2.Retrofit$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class retrofit2.Retrofit$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.serializer.AzureJacksonAdapter
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.serializer.AzureJacksonAdapter
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.AzureResponseBuilder$Factory
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.AzureResponseBuilder$Factory
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient$Builder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyEncryptionAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyEncryptionAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyOperationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeySignatureAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyVerifyResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyBundle
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKey
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyType
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKey
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyBundle
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class okhttp3.OkHttpClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class retrofit2.Retrofit
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.AzureResponseBuilder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyOperationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeySignatureAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyVerifyResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKey
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyType
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.protocol.ResponseBuilder$Factory
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.protocol.ResponseBuilder
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.KeyVaultClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.rest.RestClient
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyEncryptionAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyOperationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.webkey.JsonWebKeyEncryptionAlgorithm
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyOperationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyOperationResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyVerifyResult
+Warning: com.microsoft.sqlserver.jdbc.SQLServerColumnEncryptionAzureKeyVaultProvider: can't find referenced class com.microsoft.azure.keyvault.models.KeyBundle
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.BaseErrorListener
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.BaseErrorListener
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.Recognizer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.RecognitionException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.Recognizer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.RecognitionException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.Recognizer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.Recognizer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerErrorListener: can't find referenced class org.antlr.v4.runtime.RecognitionException
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced class org.antlr.v4.runtime.CharStreams
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced method 'void removeErrorListeners()' in program class com.microsoft.sqlserver.jdbc.SQLServerLexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced method 'void addErrorListener(org.antlr.v4.runtime.ANTLRErrorListener)' in program class com.microsoft.sqlserver.jdbc.SQLServerLexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced method 'java.util.List getAllTokens()' in program class com.microsoft.sqlserver.jdbc.SQLServerLexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced class org.antlr.v4.runtime.CharStreams
+Warning: com.microsoft.sqlserver.jdbc.SQLServerFMTQuery: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Lexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.LexerATNSimulator
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.LexerATNSimulator
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced field 'org.antlr.v4.runtime.atn.ATNSimulator _interp' in program class com.microsoft.sqlserver.jdbc.SQLServerLexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.RuntimeMetaData
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.RuntimeMetaData
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.PredictionContextCache
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.PredictionContextCache
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.VocabularyImpl
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.VocabularyImpl
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Vocabulary
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Vocabulary
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATNDeserializer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATNDeserializer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATNDeserializer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATN
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.dfa.DFA
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATN
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.dfa.DFA
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Lexer
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Vocabulary
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATN
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.dfa.DFA
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.PredictionContextCache
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Vocabulary
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATN
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.Vocabulary
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.CharStream
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.CharStream
+Warning: com.microsoft.sqlserver.jdbc.SQLServerLexer: can't find referenced class org.antlr.v4.runtime.atn.ATN
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerParser: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.SQLServerTokenIterator: can't find referenced class org.antlr.v4.runtime.Token
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.service.jdbc.DataSourceFactory
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.ServiceRegistration
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleActivator
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.ServiceRegistration
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.ServiceRegistration
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.ServiceRegistration
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.service.jdbc.DataSourceFactory
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.Activator: can't find referenced class org.osgi.framework.BundleContext
+Warning: com.microsoft.sqlserver.jdbc.osgi.SQLServerDataSourceFactory: can't find referenced class org.osgi.service.jdbc.DataSourceFactory
+Note: PearlTeethDB.MainD$Companion: can't find dynamically referenced class com.mysql.cj.jdbc.Driver
+Note: com.microsoft.sqlserver.jdbc.SQLServerConnection: can't find dynamically referenced class com.microsoft.aad.adal4j.AuthenticationContext
+Note: org.jetbrains.skiko.awt.font.AwtFontUtils: can't find dynamically referenced class sun.font.CFont
+Note: com.microsoft.sqlserver.jdbc.SQLServerDataSourceObjectFactory accesses a declared constructor '<init>()' dynamically
+Note: com.microsoft.sqlserver.jdbc.TDSChannel accesses a declared constructor '<init>()' dynamically
+Note: com.microsoft.sqlserver.jdbc.TDSChannel accesses a declared constructor '<init>(java.lang.String)' dynamically
+Warning: there were 189 unresolved references to classes or interfaces.
+         You may need to add missing library jars or update their versions.
+         If your code works fine without the missing classes, you can suppress
+         the warnings with '-dontwarn' options.
+         (https://www.guardsquare.com/proguard/manual/troubleshooting#unresolvedclass)
+Warning: there were 4 unresolved references to program class members.
+         Your input classes appear to be inconsistent.
+         You may need to recompile the code.
+         (https://www.guardsquare.com/proguard/manual/troubleshooting#unresolvedprogramclassmember)
+Unexpected error
+java.io.IOException: Please correct the above warnings first.
+	at proguard.Initializer.execute(Initializer.java:544) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.pass.PassRunner.run(PassRunner.java:24) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.initialize(ProGuard.java:328) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.execute(ProGuard.java:130) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.main(ProGuard.java:623) [proguard-base-7.2.2.jar:7.2.2]
