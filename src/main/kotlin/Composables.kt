@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 import PearlTeethDB.MainD
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
@@ -7,7 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material3.Icon
+import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.WindowState
 import java.time.LocalDate
 
@@ -160,7 +163,7 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
 }
 @Preview
 @Composable
-fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
+fun Content(currentSection: Section) {
     val image = painterResource("drawable/PearlTeethIcon.png")
     Box(
         modifier = Modifier
@@ -205,8 +208,6 @@ fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
                         modifier = Modifier
                             .fillMaxSize()
                     ){
-                        var currentMonth by remember { mutableStateOf(LocalDate.now().month) }
-                        var currentYear by remember { mutableStateOf(LocalDate.now().year) }
                         Box(modifier = Modifier.fillMaxSize().weight(1.75f).background(White)){
                             Card (elevation = 1.dp, modifier = Modifier
                                 .padding(30.dp)
@@ -214,14 +215,15 @@ fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
                                 .fillMaxSize()
                                 .clip(shape = RoundedCornerShape(10.dp)),
                             ){
-                                Schedule(currentMonth, currentYear)
+                                Schedule()
                             }
                         }
                         Box(modifier = Modifier.fillMaxSize().weight(1.25f).background(Bright1)){
                             Column(modifier = Modifier.fillMaxSize().align(Alignment.TopCenter)) {
                                 Box(modifier = Modifier.shadow(5.dp).fillMaxWidth().height(75.dp).background(LightBlue))
+                                DayScaffold()
                             }
-                            dateAdd { TODO() }
+                            dateAdd()
                         }
                     }
                 }
@@ -235,7 +237,7 @@ fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
                         .shadow(elevation = 30.dp,spotColor = Grey)
                         .clip(shape = RoundedCornerShape(15.dp)),
                     ){
-                        Filiar(updateSelectedDate = { /* Acción al actualizar la fecha */ })
+                        Filiar()
                     }
                     Card (elevation = 3.dp, modifier = Modifier
                         .padding(30.dp,0.dp,30.dp,30.dp)
@@ -317,7 +319,7 @@ fun Content(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
     }
 }
 @Composable
-fun TopBar(onMenuClick: () -> Unit) {
+fun TopBar(onMenuClickProfile: () -> Unit) {
     MaterialTheme {
         Box(modifier = Modifier
             .shadow(10.dp)
@@ -366,7 +368,7 @@ fun TopBar(onMenuClick: () -> Unit) {
                     .wrapContentSize(Alignment.CenterEnd)
             ){
                 Button(
-                    onClick = {},
+                    onClick = onMenuClickProfile,
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = TurquoiseLite),
                     modifier = Modifier.width(400.dp).wrapContentSize(align = Alignment.CenterEnd)
@@ -394,7 +396,7 @@ fun TopBar(onMenuClick: () -> Unit) {
                     }
                 }
                 IconButton(
-                    onClick = onMenuClick,
+                    onClick = {},
                     modifier = Modifier
                         .padding(10.dp,0.dp,0.dp,0.dp)
                 ){
@@ -412,7 +414,7 @@ fun TopBar(onMenuClick: () -> Unit) {
 @Composable
 fun LoginPage(onClose: () -> Unit) {
     val icon = painterResource("drawable/PearlTeethIcon.png")
-    val state = WindowState(width = 500.dp, height = 700.dp)
+    val state = WindowState(width = 500.dp, height = 700.dp,position = WindowPosition.Aligned(Alignment.Center))
     var visibility by remember { mutableStateOf(true) }
     var isMaxScreen by remember { mutableStateOf(false) }
     Window(onCloseRequest = { onClose.invoke();MainD.desconecta() }, title = "Login", visible = visibility, state = state, icon = icon, resizable = false) {
@@ -574,7 +576,7 @@ fun LoginPage(onClose: () -> Unit) {
                                                     isSecondWindowOpen = true
                                                     isMaxScreen = !isMaxScreen
                                                 } else {
-                                                    showOverlay2.value = true
+                                                    showOverlayLogin.value = true
                                                 }
                                             },
                                             modifier = Modifier
@@ -599,9 +601,6 @@ fun LoginPage(onClose: () -> Unit) {
                                                 onClose = {
                                                     isSecondWindowOpen = false
                                                     visibility = true
-                                                },
-                                                updateSelectedDate = { newDate ->
-                                                    println("Nueva fecha seleccionada: $newDate")
                                                 }
                                             )
                                             visibility = false
@@ -612,11 +611,11 @@ fun LoginPage(onClose: () -> Unit) {
                         }
                     }
                 }
-                val currentShowOverlay by rememberUpdatedState(showOverlay2.value)
+                val currentShowOverlay by rememberUpdatedState(showOverlayLogin.value)
                 if (currentShowOverlay) {
                     LoginOverlay(
                         onOverlayDismiss = {
-                            showOverlay2.value = false
+                            showOverlayLogin.value = false
                         },
                         onOverlayAction = {},
                     )

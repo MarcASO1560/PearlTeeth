@@ -7,10 +7,10 @@ import androidx.compose.ui.window.*
 import java.awt.Dimension
 import java.time.LocalDate
 
-var textoTituloPanel = mutableStateOf("Menu principal")
+var textoTituloPanel = mutableStateOf("PearlTeeth")
 var selectedDateGlobal = mutableStateOf(LocalDate.now())
 @Composable
-fun menu(onClose: () -> Unit, updateSelectedDate: (LocalDate) -> Unit) {
+fun menu(onClose: () -> Unit) {
     var currentSection by remember { mutableStateOf(Section.HOME) }
     val state = rememberWindowState(
         placement = WindowPlacement.Maximized
@@ -34,38 +34,55 @@ fun menu(onClose: () -> Unit, updateSelectedDate: (LocalDate) -> Unit) {
                     color = Bright1
                 ){
                     Column {
-                        TopBar(onMenuClick = { showOverlay2.value = true })
-                        Row {
-                            SideBar { section ->
-                                currentSection = section
+                        TopBar(onMenuClickProfile = { showOverlayProfile.value = true })
+                        Box{
+                            Row {
+                                SideBar { section ->
+                                    currentSection = section
+                                }
+                                myPage(currentSection)
                             }
-                            myPage(currentSection,updateSelectedDate)
+                            if (showOverlayCreateDate.value) {
+                                createDatesOverlay(
+                                    onOverlayDismiss = {
+                                        showOverlayCreateDate.value = false
+                                    },
+                                    onOverlayAction = {},
+                                )
+                            }
                         }
                     }
                 }
             },
         )
-        // Mostrar el overlay cuando showOverlay es true
-        if (showOverlay.value) {
+        if (showOverlayCalendar.value) {
             CalendarOverlay(
                 initialSelectedDate = selectedDateGlobal.value,
-                onOverlayDismiss = { showOverlay.value = false },
+                onOverlayDismiss = { showOverlayCalendar.value = false },
                 dateSelectionListener = object : DateSelectionListener {
-                    override fun onDateSelected(newDate: LocalDate) {
-                        selectedDateGlobal.value = newDate // Actualiza el estado global
+                    override fun onDateSelected(selectedDate: LocalDate) {
+                        selectedDateGlobal.value = selectedDate // Actualiza el estado global
                     }
                 }
+            )
+        }
+        if (showOverlayProfile.value) {
+            ProfileOverlay(
+                onOverlayDismiss = {
+                    showOverlayProfile.value = false
+                },
+                onOverlayAction = {},
             )
         }
     }
 }
 @Composable
-fun myPage(currentSection: Section, updateSelectedDate: (LocalDate) -> Unit) {
+fun myPage(currentSection: Section) {
     when (currentSection) {
-        Section.HOME -> Content(currentSection = Section.HOME, updateSelectedDate = updateSelectedDate)
-        Section.CALENDAR -> Content(currentSection = Section.CALENDAR, updateSelectedDate = updateSelectedDate)
-        Section.FILIAR -> Content(currentSection = Section.FILIAR, updateSelectedDate = updateSelectedDate)
-        Section.PATIENTS -> Content(currentSection = Section.PATIENTS, updateSelectedDate = updateSelectedDate)
+        Section.HOME -> Content(currentSection = Section.HOME)
+        Section.CALENDAR -> Content(currentSection = Section.CALENDAR)
+        Section.FILIAR -> Content(currentSection = Section.FILIAR)
+        Section.PATIENTS -> Content(currentSection = Section.PATIENTS)
     }
 }
 enum class Section {

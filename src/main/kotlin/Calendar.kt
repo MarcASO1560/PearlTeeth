@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material3.Icon
+import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
@@ -21,10 +21,9 @@ import java.time.Month
 
 
 data class DayInfo(val day: Int, val isClickable: Boolean, val month: Month, val year: Int)
-var selectedDate by mutableStateOf(LocalDate.now())
 
 // Función para obtener la matriz de días del mes y año especificados
-fun getDaysMatrix(year: Int, month: Month, selectedDay: DayInfo): List<List<DayInfo>> {
+fun getDaysMatrix(year: Int, month: Month): List<List<DayInfo>> {
 	val firstDayOfMonth = LocalDate.of(year, month.ordinal + 1, 1)
 	val daysInMonth = firstDayOfMonth.lengthOfMonth()
 
@@ -70,7 +69,7 @@ fun getDaysMatrix(year: Int, month: Month, selectedDay: DayInfo): List<List<DayI
 
 	return daysMatrix
 }
-fun getDaysMatrix2(year: Int, month: Month, selectedDay: String): List<List<DayInfo>> {
+fun getDaysMatrix2(year: Int, month: Month): List<List<DayInfo>> {
 	val firstDayOfMonth = LocalDate.of(year, month.ordinal + 1, 1)
 	val daysInMonth = firstDayOfMonth.lengthOfMonth()
 
@@ -122,7 +121,7 @@ fun getDaysMatrix2(year: Int, month: Month, selectedDay: String): List<List<DayI
 fun Month.next(): Month = if (this == Month.DECEMBER) Month.JANUARY else Month.values()[this.ordinal + 1]
 fun Month.previous(): Month = if (this == Month.JANUARY) Month.DECEMBER else Month.values()[this.ordinal - 1]
 @Composable
-fun Schedule(currentMonth: Month, currentYear: Int) {
+fun Schedule() {
 	// Agrega esta función a tu código
 	fun getSpanishMonthName(month: Month): String {
 		return when (month) {
@@ -147,9 +146,9 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 		val today = LocalDate.now()
 		mutableStateOf(DayInfo(today.dayOfMonth, true, today.month, today.year))
 	}
-	var daysMatrix by remember { mutableStateOf(getDaysMatrix(currentYear, currentMonth, selectedDay)) }
+	var daysMatrix by remember { mutableStateOf(getDaysMatrix(currentYear, currentMonth)) }
 	fun updateDaysMatrix() {
-		daysMatrix = getDaysMatrix(currentYear, currentMonth, selectedDay)
+		daysMatrix = getDaysMatrix(currentYear, currentMonth)
 	}
 
 	Column {
@@ -375,9 +374,9 @@ fun Schedule(currentMonth: Month, currentYear: Int) {
 	}
 }
 @Composable
-fun dateAdd(onClick: () -> Unit) {
+fun dateAdd() {
 	FloatingActionButton(
-		onClick = { onClick() },
+		onClick = { showOverlayCreateDate.value = true },
 		backgroundColor = Lilac,
 		contentColor = White,
 		shape = CircleShape,

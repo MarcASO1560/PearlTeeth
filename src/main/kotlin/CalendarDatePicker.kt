@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material3.Icon
+import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
@@ -12,6 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -52,17 +54,22 @@ fun Schedule2(
 		mutableStateOf(LocalDate.of(initialYear.toInt(), initialMonth, initialDay.toInt()))
 	}
 
-	var daysMatrix by remember { mutableStateOf(getDaysMatrix2(selectedYear.toInt(), Month.of(selectedMonth), selectedDay)) }
+	var daysMatrix by remember { mutableStateOf(getDaysMatrix2(selectedYear.toInt(), Month.of(selectedMonth))) }
 
 	fun updateDaysMatrix() {
-		daysMatrix = getDaysMatrix2(selectedYear.toInt(), Month.of(selectedMonth), selectedDay)
+		daysMatrix = getDaysMatrix2(selectedYear.toInt(), Month.of(selectedMonth))
 	}
 
 	Column {
 		Column {
 			// Añade un TextField para seleccionar el año
+			val focusRequester = remember { FocusRequester() }
+			LaunchedEffect(Unit) {
+				focusRequester.requestFocus()
+			}
 			TextField(
 				value = selectedYear,
+				enabled = true,
 				onValueChange = {
 					// Maneja el cambio de año
 					it.toIntOrNull()?.let { year ->
@@ -81,6 +88,7 @@ fun Schedule2(
 				modifier = Modifier
 					.background(Turquoise)
 					.fillMaxWidth()
+					.focusRequester(focusRequester)
 					.wrapContentSize(align = Alignment.Center),
 				textStyle = TextStyle(
 					textAlign = TextAlign.Center,

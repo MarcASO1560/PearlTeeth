@@ -1,9 +1,6 @@
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -11,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -22,26 +18,30 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.time.LocalDate
 import androidx.compose.runtime.mutableStateOf
-import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
-val showOverlay = mutableStateOf(false)
-val showOverlay2 = mutableStateOf(false)
-
-fun updateSelectedDate(newDate: String) {
-	// Convierte la cadena de fecha en LocalDate
-	val date = LocalDate.parse(newDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-	// Actualiza el estado que el DatePicker está observando
-	selectedDate = date
-}
 @Composable
-fun Filiar(updateSelectedDate: (LocalDate) -> Unit) {
+fun Filiar() {
+	val scrollState = rememberScrollState()
+
 	var showCalendarOverlay by remember { mutableStateOf(false) }
 	var showLoginOverlay by remember { mutableStateOf(false) }
 
+	var nombre = remember { mutableStateOf("") }
+	var apellidos = remember { mutableStateOf("") }
+	var NumIdentificacion = remember { mutableStateOf("") }
+	//TipoId VARIABLES
+	val options = listOf("DNI", "NIE", "Pasaporte")
+	val expanded = remember { mutableStateOf(false) }
+	val selectedOptionText = remember { mutableStateOf(options[0]) }
+	//sexo VARIABLES
+	val optionsSex = listOf("Hombre", "Mujer", "Otro")
+	val expandedSex = remember { mutableStateOf(false) }
+	val selectedOptionTextSex = remember { mutableStateOf("Sexo") }
+
 	if (showCalendarOverlay) {
-		menu(onClose = {}, updateSelectedDate = updateSelectedDate)
+		menu(onClose = {})
 	}
 	if (showLoginOverlay) {
 		LoginOverlay(
@@ -49,35 +49,35 @@ fun Filiar(updateSelectedDate: (LocalDate) -> Unit) {
 			onOverlayAction = { /* Acción al aplicar */ }
 		)
 	}
+
 	Box(
 		modifier = Modifier.fillMaxSize()
-			.padding(10.dp, 10.dp, 10.dp, 10.dp)
-			.background(color = White)
+			.padding(10.dp)
+			.background(White)
 	) {
-
-		val state = rememberLazyListState()
-
-		LazyColumn(
-			modifier = Modifier.padding(10.dp).fillMaxSize(),
-			state = state
-		) {
-			item {
-				DatosAdministrativos(
-					setShowOverlay = { showOverlay.value = it }
-				)
-			}
-			item {
-				DatosDomicilio()
-			}
-			item {
-				DatosBanco()
-			}
+		// Usamos Column con el modificador verticalScroll
+		Column(modifier = Modifier.verticalScroll(scrollState)) {
+			DatosAdministrativos(
+				setShowOverlay = { showOverlayCalendar.value = it },
+				nombre = nombre,
+				apellidos = apellidos,
+				NumIdentificacion = NumIdentificacion,
+				options = options,
+				expanded = expanded,
+				selectedOptionText = selectedOptionText,
+				optionsSex = optionsSex,
+				expandedSex = expandedSex,
+				selectedOptionTextSex = selectedOptionTextSex
+			)
+			DatosPaciente()
+			DatosDomicilio()
+			// Agrega aquí más composables si es necesario
 		}
+
+		// Si aún quieres usar la barra de desplazamiento:
 		VerticalScrollbar(
 			modifier = Modifier.align(Alignment.CenterEnd).fillMaxHeight(),
-			adapter = rememberScrollbarAdapter(
-				scrollState = state
-			)
+			adapter = rememberScrollbarAdapter(scrollState = scrollState)
 		)
 	}
 }
@@ -85,14 +85,18 @@ fun Filiar(updateSelectedDate: (LocalDate) -> Unit) {
 @Composable
 fun DatosAdministrativos(
 	setShowOverlay: (Boolean) -> Unit,
+	nombre: MutableState<String>,
+	apellidos: MutableState<String>,
+	NumIdentificacion: MutableState<String>,
+	options: List<String>,
+	expanded: MutableState<Boolean>,
+	selectedOptionText: MutableState<String>,
+	optionsSex: List<String>,
+	expandedSex: MutableState<Boolean>,
+	selectedOptionTextSex: MutableState<String>
 ) {
-	//Datos administrativos
-	var nombre = remember { mutableStateOf("") }
-	var apellidos = remember { mutableStateOf("") }
-	var NumIdentificacion = remember { mutableStateOf("") }
-
 	Card(
-		backgroundColor = White,
+		backgroundColor = Bright1,
 		modifier = Modifier
 			.padding(8.dp, 20.dp, 20.dp, 8.dp)
 			.fillMaxWidth()
@@ -176,7 +180,7 @@ fun DatosAdministrativos(
 									fontSize = 16.sp
 								)
 							)
-							tipoId()
+							tipoId( options = options, expanded = expanded, selectedOptionText = selectedOptionText)
 							TextField(
 								value = NumIdentificacion.value,
 								onValueChange = { NumIdentificacion.value = it },
@@ -209,10 +213,14 @@ fun DatosAdministrativos(
 						}
 						Row {
 							DatePicker(
-								title = "Seleccione una fecha",
+								title = "Fecha de nacimiento",
 								setShowOverlay = { show -> setShowOverlay(show) }
 							)
-							sexo()
+							sexo(
+								optionsSex = optionsSex,
+								expandedSex = expandedSex,
+								selectedOptionTextSex = selectedOptionTextSex
+							)
 						}
 					}
 				}
@@ -312,7 +320,7 @@ fun DatosDomicilio() {
 	var TelefonoAuxiliar = remember { mutableStateOf("") }
 	var Email = remember { mutableStateOf("") }
 	Card(
-		backgroundColor = White,
+		backgroundColor = Bright1,
 		modifier = Modifier
 			.padding(8.dp,8.dp,20.dp,8.dp)
 			.fillMaxWidth()
@@ -645,11 +653,12 @@ fun DatosDomicilio() {
 	}
 }
 @Composable
-fun DatosBanco() {
-	//Datos Personales
-	var IBAN = remember { mutableStateOf("") }
+fun DatosPaciente() {
+	var Alergias = remember { mutableStateOf("") }
+	var Enfermedades = remember { mutableStateOf("") }
+	var Medicaciones = remember { mutableStateOf("") }
 	Card(
-		backgroundColor = White,
+		backgroundColor = Bright1,
 		modifier = Modifier
 			.padding(8.dp,8.dp,20.dp,8.dp)
 			.fillMaxWidth()
@@ -660,7 +669,7 @@ fun DatosBanco() {
 			Box(modifier = Modifier.fillMaxWidth().height(35.dp).shadow(10.dp).background(Turquoise)) {
 				Text(
 					modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.Center),
-					text = "Datos Bancarios",
+					text = "Datos del paciente",
 					style = MaterialTheme.typography.h6,
 					color = White,
 					fontWeight = FontWeight.Bold
@@ -671,21 +680,20 @@ fun DatosBanco() {
 					Column(modifier = Modifier.weight(1f)) {
 						Row {
 							TextField(
-								value = IBAN.value,
-								onValueChange = { IBAN.value = it },
+								value = Alergias.value,
+								onValueChange = { Alergias.value = it },
 								label = {
 									Text(
-										text = "IBAN",
+										text = "Alergias",
 										fontSize = 12.sp,
 										fontWeight = FontWeight.Bold,
 										color = Turquoise
-									)
-								},
+									) },
 								modifier = Modifier
-									.padding(20.dp, 20.dp, 20.dp, 20.dp)
-									.weight(0.2f)
+									.padding(20.dp,20.dp,20.dp,10.dp)
+									.weight(1f)
 									.fillMaxWidth()
-									.shadow(elevation = 20.dp, spotColor = Turquoise)
+									.shadow(elevation = 20.dp,spotColor = Turquoise)
 									.clip(shape = RoundedCornerShape(10.dp))
 									.height(50.dp),
 								colors = TextFieldDefaults.textFieldColors(
@@ -701,6 +709,71 @@ fun DatosBanco() {
 								)
 							)
 						}
+						Row {
+							TextField(
+								value = Enfermedades.value,
+								onValueChange = { Enfermedades.value = it },
+								label = {
+									Text(
+										text = "Enfermedades",
+										fontSize = 12.sp,
+										fontWeight = FontWeight.Bold,
+										color = Turquoise
+									) },
+								modifier = Modifier
+									.padding(20.dp,10.dp,20.dp,10.dp)
+									.weight(1f)
+									.fillMaxWidth()
+									.shadow(elevation = 20.dp,spotColor = Turquoise)
+									.clip(shape = RoundedCornerShape(10.dp))
+									.height(50.dp),
+								colors = TextFieldDefaults.textFieldColors(
+									backgroundColor = White,
+									focusedIndicatorColor = Turquoise,
+									cursorColor = Grey,
+									textColor = Dark2,
+									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
+								)
+							)
+						}
+						Row {
+							TextField(
+								value = Medicaciones.value,
+								onValueChange = { Medicaciones.value = it },
+								label = {
+									Text(
+										text = "Medicación",
+										fontSize = 12.sp,
+										fontWeight = FontWeight.Bold,
+										color = Turquoise
+									) },
+								modifier = Modifier
+									.padding(20.dp,10.dp,20.dp,10.dp)
+									.weight(1f)
+									.fillMaxWidth()
+									.shadow(elevation = 20.dp,spotColor = Turquoise)
+									.clip(shape = RoundedCornerShape(10.dp))
+									.height(50.dp),
+								colors = TextFieldDefaults.textFieldColors(
+									backgroundColor = White,
+									focusedIndicatorColor = Turquoise,
+									cursorColor = Grey,
+									textColor = Dark2,
+									unfocusedIndicatorColor = White
+								),
+								textStyle = TextStyle(
+									fontWeight = FontWeight.Bold,
+									fontSize = 16.sp
+								)
+							)
+						}
+						Row {
+							grupoSanguineo()
+						}
 					}
 				}
 			}
@@ -708,11 +781,7 @@ fun DatosBanco() {
 	}
 }
 @Composable
-fun tipoId() {
-	val options = listOf("DNI", "NIE", "Pasaporte")
-	val expanded = remember { mutableStateOf(false) }
-	val selectedOptionText = remember { mutableStateOf(options[0]) }
-
+fun tipoId(options: List<String>, expanded: MutableState<Boolean>, selectedOptionText: MutableState<String>) {
 	Box(
 		contentAlignment = Alignment.CenterStart,
 		modifier = Modifier
@@ -757,11 +826,7 @@ fun tipoId() {
 	}
 }
 @Composable
-fun sexo() {
-	val options = listOf("Hombre", "Mujer", "Otro")
-	val expanded = remember { mutableStateOf(false) }
-	val selectedOptionText = remember { mutableStateOf("Sexo") }
-
+fun sexo(optionsSex: List<String>, expandedSex: MutableState<Boolean>, selectedOptionTextSex: MutableState<String>) {
 	Box(
 		contentAlignment = Alignment.CenterStart,
 		modifier = Modifier
@@ -771,10 +836,10 @@ fun sexo() {
 			.shadow(elevation = 20.dp,spotColor = Turquoise)
 			.clip(shape = RoundedCornerShape(10.dp))
 			.background(White)
-			.clickable { expanded.value = !expanded.value },
+			.clickable { expandedSex.value = !expandedSex.value },
 	) {
 		Text(
-			text = selectedOptionText.value,
+			text = selectedOptionTextSex.value,
 			fontWeight = FontWeight.Bold,
 			fontSize = 14.sp,
 			color = Turquoise,
@@ -786,14 +851,14 @@ fun sexo() {
 			tint = Turquoise
 		)
 		DropdownMenu(
-			expanded = expanded.value,
-			onDismissRequest = { expanded.value = false }
+			expanded = expandedSex.value,
+			onDismissRequest = { expandedSex.value = false }
 		) {
-			options.forEach { selectionOption ->
+			optionsSex.forEach { selectionOption ->
 				DropdownMenuItem(
 					onClick = {
-						selectedOptionText.value = selectionOption
-						expanded.value = false
+						selectedOptionTextSex.value = selectionOption
+						expandedSex.value = false
 					}
 				) {
 					Text(text = selectionOption,
@@ -814,7 +879,7 @@ fun grupoSanguineo() {
 	Box(
 		contentAlignment = Alignment.CenterStart,
 		modifier = Modifier
-			.padding(10.dp, 20.dp, 10.dp, 10.dp)
+			.padding(20.dp, 10.dp, 10.dp, 20.dp)
 			.width(200.dp)
 			.height(50.dp)
 			.shadow(elevation = 20.dp, spotColor = Turquoise)
@@ -998,58 +1063,6 @@ fun medioContratoClienteAcepta() {
 					color = Grey,
 					modifier = Modifier.fillMaxSize().wrapContentSize(align = Alignment.CenterStart)
 				)
-			}
-		}
-	}
-}
-@Composable
-fun estadoCivil() {
-	val options = listOf("Soltero/a","Cónyuge sobreviviente que reúne los re-quisitos", "Casado presentando conjuntamente", "Jefe de familia", "Casado presentando por separado")
-	val expanded = remember { mutableStateOf(false) }
-	val selectedOptionText = remember { mutableStateOf("Estado Civil") }
-
-	Box(
-		contentAlignment = Alignment.CenterStart,
-		modifier = Modifier
-			.padding(10.dp,20.dp,10.dp,10.dp)
-			.width(260.dp)
-			.height(50.dp)
-			.shadow(elevation = 20.dp,spotColor = Turquoise)
-			.clip(shape = RoundedCornerShape(10.dp))
-			.background(White)
-			.clickable { expanded.value = !expanded.value },
-	) {
-		Row {
-			Text(
-				text = selectedOptionText.value,
-				fontWeight = FontWeight.Bold,
-				fontSize = 14.sp,
-				color = Turquoise,
-				modifier = Modifier.fillMaxSize().padding(10.dp).wrapContentSize(align = Alignment.CenterStart).weight(7f)
-			)
-			Icon(
-				Icons.Filled.ArrowDropDown, "contentDescription",
-				Modifier.fillMaxSize().wrapContentSize(align = Alignment.CenterEnd).weight(1f),
-				tint = Turquoise
-			)
-		}
-		DropdownMenu(
-			expanded = expanded.value,
-			modifier = Modifier.width(260.dp),
-			onDismissRequest = { expanded.value = false }
-		) {
-			options.forEach { selectionOption ->
-				DropdownMenuItem(
-					onClick = {
-						selectedOptionText.value = selectionOption
-						expanded.value = false
-					}
-				) {
-					Text(text = selectionOption,
-						fontWeight = FontWeight.Bold,
-						fontSize = 14.sp,
-						color = Turquoise)
-				}
 			}
 		}
 	}

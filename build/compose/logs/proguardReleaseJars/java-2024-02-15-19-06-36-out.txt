@@ -1,0 +1,135 @@
+ProGuard, version 7.2.2
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: duplicate definition of resource file [META-INF/MANIFEST.MF]
+Note: there were 27 duplicate class definitions.
+      (https://www.guardsquare.com/proguard/manual/troubleshooting#duplicateclass)
+Note: com.google.protobuf.FieldInfo calls 'Field.getType'
+Note: com.google.protobuf.FieldType calls 'Field.getType'
+Note: com.google.protobuf.FieldType calls 'Field.getGenericType'
+Note: com.google.protobuf.FieldType calls 'Class.getGenericInterfaces'
+Note: com.google.protobuf.FieldType calls 'Class.getGenericSuperclass'
+Note: com.google.protobuf.FieldType calls 'Class.getTypeParameters'
+Note: com.google.protobuf.MessageSchema calls 'Field.getType'
+Note: com.google.protobuf.UnsafeUtil calls 'Field.getType'
+Note: org.jetbrains.skiko.ReflectionUtil$findAssignableField$result$1 calls 'Field.getType'
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find superclass or interface com.mchange.v2.c3p0.QueryConnectionTester
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.C3P0ProxyConnection
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.C3P0ProxyConnection
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.C3P0ProxyConnection
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.ConnectionTester
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.QueryConnectionTester
+Warning: com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester: can't find referenced class com.mchange.v2.c3p0.C3P0ProxyConnection
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.LoggerFactory
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.LoggerFactory
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.log.Slf4JLogger: can't find referenced class org.slf4j.Logger
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Warning: com.mysql.cj.protocol.a.authentication.AuthenticationOciClient: can't find referenced class com.oracle.bmc.ConfigFileReader$ConfigFile
+Note: com.google.protobuf.Android: can't find dynamically referenced class libcore.io.Memory
+Note: com.google.protobuf.Android: can't find dynamically referenced class org.robolectric.Robolectric
+Note: com.mysql.cj.conf.ConnectionUrl calls '(com.mysql.cj.conf.ConnectionPropertiesTransform)Class.forName(variable).newInstance()'
+Note: com.mysql.cj.jdbc.MysqlDataSourceFactory calls '(com.mysql.cj.jdbc.MysqlDataSource)Class.forName(variable).newInstance()'
+Note: com.mysql.cj.jdbc.ha.LoadBalancedConnectionProxy calls '(com.mysql.cj.jdbc.ha.BalanceStrategy)Class.forName(variable).newInstance()'
+Note: com.mysql.cj.protocol.AbstractSocketConnection calls '(com.mysql.cj.protocol.SocketFactory)Class.forName(variable).newInstance()'
+Note: com.mysql.cj.protocol.a.NativeAuthenticationProvider calls '(com.mysql.cj.protocol.AuthenticationPlugin)Class.forName(variable).newInstance()'
+Note: org.jetbrains.skiko.awt.font.AwtFontUtils: can't find dynamically referenced class sun.font.CFont
+Note: com.google.protobuf.ByteBufferWriter accesses a declared field 'channel' dynamically
+Note: com.google.protobuf.DescriptorMessageInfoFactory accesses a declared method 'getDefaultInstance()' dynamically
+Note: com.google.protobuf.Descriptors$FileDescriptor accesses a field 'descriptor' dynamically
+Note: com.google.protobuf.ExtensionSchemas accesses a declared constructor '<init>()' dynamically
+Note: com.google.protobuf.GeneratedMessage$4 accesses a field 'descriptor' dynamically
+Note: com.google.protobuf.GeneratedMessageLite$SerializedForm accesses a declared field 'DEFAULT_INSTANCE' dynamically
+Note: com.google.protobuf.GeneratedMessageLite$SerializedForm accesses a declared field 'defaultInstance' dynamically
+Note: com.google.protobuf.Internal accesses a method 'getDefaultInstance()' dynamically
+Note: com.google.protobuf.MapFieldSchemas accesses a declared constructor '<init>()' dynamically
+Note: com.google.protobuf.NewInstanceSchemas accesses a declared constructor '<init>()' dynamically
+Note: com.google.protobuf.SchemaUtil accesses a constructor '<init>(boolean)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getByte(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putByte(java.lang.Object,long,byte)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getBoolean(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putBoolean(java.lang.Object,long,boolean)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getFloat(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putFloat(java.lang.Object,long,float)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getDouble(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putDouble(java.lang.Object,long,double)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getByte(long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putByte(long,byte)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getInt(long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putInt(long,int)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'getLong(long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'putLong(long,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'copyMemory(long,long,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$JvmMemoryAccessor accesses a method 'copyMemory(java.lang.Object,long,java.lang.Object,long,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'objectFieldOffset(java.lang.reflect.Field)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'arrayBaseOffset(java.lang.Class)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'arrayIndexScale(java.lang.Class)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'getInt(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'putInt(java.lang.Object,long,int)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'getLong(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'putLong(java.lang.Object,long,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'getObject(java.lang.Object,long)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'putObject(java.lang.Object,long,java.lang.Object)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'objectFieldOffset(java.lang.reflect.Field)' dynamically
+Note: com.google.protobuf.UnsafeUtil$MemoryAccessor accesses a method 'getLong(java.lang.Object,long)' dynamically
+Note: com.mysql.cj.exceptions.ExceptionFactory accesses a constructor '<init>(java.lang.String)' dynamically
+Note: com.mysql.cj.log.LogFactory accesses a constructor '<init>(java.lang.String)' dynamically
+Warning: there were 36 unresolved references to classes or interfaces.
+         You may need to add missing library jars or update their versions.
+         If your code works fine without the missing classes, you can suppress
+         the warnings with '-dontwarn' options.
+         (https://www.guardsquare.com/proguard/manual/troubleshooting#unresolvedclass)
+Unexpected error
+java.io.IOException: Please correct the above warnings first.
+	at proguard.Initializer.execute(Initializer.java:544) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.pass.PassRunner.run(PassRunner.java:24) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.initialize(ProGuard.java:328) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.execute(ProGuard.java:130) ~[proguard-base-7.2.2.jar:7.2.2]
+	at proguard.ProGuard.main(ProGuard.java:623) [proguard-base-7.2.2.jar:7.2.2]
