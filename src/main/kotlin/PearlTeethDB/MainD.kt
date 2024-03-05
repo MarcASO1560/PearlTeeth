@@ -8,11 +8,13 @@ class MainD {
 	companion object {
 		var conection: Connection? = null
 
-		fun conecta(onSuccess: () -> Unit, onError: (SQLException) -> Unit) {
+		fun conecta(
+			onSuccess: () -> Unit, onError: (SQLException) -> Unit
+		) {
 			try {
-				Class.forName("com.microsoft.sqlserver:mysql-jdbc")
+				Class.forName("com.mysql.cj.jdbc.Driver")
 				conection = DriverManager.getConnection(
-					"jdbc:mysql://192.168.56.104:3306/PearlTeeth", "admin", "1560"
+					"jdbc:mysql://192.168.56.104:3306/pearlteethpr", "admin", "1560"
 				)
 				println("You have been connected :)")
 				onSuccess()

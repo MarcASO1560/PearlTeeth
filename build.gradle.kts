@@ -22,23 +22,26 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEa
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("com.microsoft.sqlserver:mysql-jdbc:8.2.0.jre8")
+    implementation("com.mysql:mysql-connector-j:8.3.0")
+    implementation("com.darkrockstudios:mpfilepicker:3.1.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "18"
+        jvmTarget = "21"
         freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
 }
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(18))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 compose.desktop {
     application {
         mainClass = "AppKt"
+        jvmArgs("-Dskiko.rendering.laf.global=true")
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules("java.instrument" , "java.sql", "jdk.unsupported")
@@ -71,8 +74,8 @@ compose.desktop {
             // Añade la configuración del JVM que se incluirá con tu aplicación
             jvmArgs += listOf(
                 // Argumentos del JVM que deseas incluir
-                "-Xmx4G",
-                "-Xms2G"
+                "-Xmx8G", // Ejemplo: Establecer el tamaño máximo del heap a 4 GB
+                "-Xms2G"  // Ejemplo: Establecer el tamaño inicial del heap a 2 GB
             )
 
             modules("java.instrument", "java.sql", "jdk.unsupported") // Asegúrate de que los módulos requeridos estén incluidos.

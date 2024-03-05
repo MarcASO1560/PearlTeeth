@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.darkrockstudios:mpfilepicker-jvm:3.1.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.darkrockstudios" artifactId="mpfilepicker-jvm" version="3.1.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.darkrockstudios/mpfilepicker-jvm/3.1.0/ed2e2e4a6b04334d36b4c33d5eb52e97dacb4188/mpfilepicker-jvm-3.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.darkrockstudios/mpfilepicker-jvm/3.1.0/4249dbce9a8b49a1c9ce5909a04b406e30459db1/mpfilepicker-jvm-3.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

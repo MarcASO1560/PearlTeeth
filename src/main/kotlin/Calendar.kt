@@ -64,7 +64,7 @@ fun getDaysMatrix(year: Int, month: Month): List<List<DayInfo>> {
 
 	// Asegurarse de tener 4 filas
 	while (daysMatrix.size < 4) {
-		daysMatrix.add(List(7) { DayInfo(0, false, nextMonth, nextMonthYear) })
+		daysMatrix.add(List(6) { DayInfo(0, false, nextMonth, nextMonthYear) })
 	}
 
 	return daysMatrix
@@ -297,7 +297,7 @@ fun Schedule() {
 					Box(
 						modifier = Modifier
 							.fillMaxSize()
-							.padding(2.dp),
+							.padding(1.dp),
 						contentAlignment = Alignment.Center,
 					) {Text("Sabado",color = White,textAlign = TextAlign.Center,fontSize = 16.sp,fontWeight = FontWeight.Bold)}
 
@@ -321,18 +321,10 @@ fun Schedule() {
 			for (row in daysMatrix) {
 				Row(modifier = Modifier.fillMaxWidth().weight(1f)) {
 					for (dayInfo in row) {
-						val backgroundColor =
-							if (dayInfo.day > 0) White else TurquoiseLite // Color más oscuro para días no válidos
+						val backgroundColor = White
 						Card(
 							elevation = 1.dp,
-							modifier = Modifier
-								.padding(5.dp)
-								.fillMaxHeight()
-								.weight(1f)
-								.shadow(20.dp)
-								.clip(shape = RoundedCornerShape(10.dp))
-								.clickable {
-									if (dayInfo.isClickable) {
+							modifier = Modifier.padding(5.dp).fillMaxHeight().weight(1f).shadow(20.dp).clip(shape = RoundedCornerShape(10.dp)).clickable { if (dayInfo.isClickable) {
 										val selectedMonth = getSpanishMonthName(currentMonth)
 										val currentMonthText = getSpanishMonthName(dayInfo.month)
 										if (currentMonthText == selectedMonth) {

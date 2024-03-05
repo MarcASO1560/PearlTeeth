@@ -7,7 +7,7 @@
 --java-options
 "'-Dcompose.application.resources.dir=$APPDIR\\resources'"
 --main-jar
-"PearlTeeth-1.0-SNAPSHOT-45814739e1152280b96f33a12ddd8a22.jar"
+"PearlTeeth-1.0-SNAPSHOT-938b933d1ab69726c349393674dbe65a.jar"
 --main-class
 "AppKt"
 --icon
@@ -15,7 +15,9 @@
 --java-options
 "'-Dcompose.application.configure.swing.globals=true'"
 --java-options
-"'-Xmx4G'"
+"'-Dskiko.rendering.laf.global=true'"
+--java-options
+"'-Xmx8G'"
 --java-options
 "'-Xms2G'"
 --java-options

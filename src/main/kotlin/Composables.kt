@@ -4,6 +4,7 @@ import PearlTeethDB.MainD
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -33,14 +34,15 @@ import androidx.compose.ui.window.WindowState
 import java.time.LocalDate
 
 //Piezas importantes para la página principal.
-var accountName = "adminconnombrelargo@pearlteeth.es"
+var accountName = ""
+var currentSection = mutableStateOf(Section.HOME)
+
+val ButtonColor1 = mutableStateOf(Grey)
+val ButtonColor2 = mutableStateOf(Grey)
+val ButtonColor3 = mutableStateOf(Grey)
+val ButtonColor4 = mutableStateOf(Grey)
 @Composable
 fun SideBar(onSectionSelected: (Section) -> Unit) {
-    val ButtonColor1 = remember { mutableStateOf(Grey)}
-    val ButtonColor2 = remember { mutableStateOf(Grey)}
-    val ButtonColor3 = remember { mutableStateOf(Grey)}
-    val ButtonColor4 = remember { mutableStateOf(Grey)}
-    var currentSection by remember { mutableStateOf(Section.HOME) }
     MaterialTheme {
         Box(
             modifier = Modifier
@@ -56,8 +58,8 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
             ) {
                 Button(
                     onClick = {
-                        currentSection = Section.CALENDAR
-                        onSectionSelected(currentSection)
+                        currentSection.value = Section.CALENDAR
+                        onSectionSelected(currentSection.value)
                         ButtonColor1.value = Turquoise
                         ButtonColor2.value = Grey
                         ButtonColor3.value = Grey
@@ -85,8 +87,8 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                 }
                 Button(
                     onClick = {
-                        currentSection = Section.FILIAR
-                        onSectionSelected(currentSection)
+                        currentSection.value = Section.FILIAR
+                        onSectionSelected(currentSection.value)
                         ButtonColor1.value = Grey
                         ButtonColor2.value = Turquoise
                         ButtonColor3.value = Grey
@@ -112,12 +114,14 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                 }
                 Button(
                     onClick = {
-                        currentSection = Section.PATIENTS
-                        onSectionSelected(currentSection)
+                        currentSection.value = Section.PATIENTS
+                        onSectionSelected(currentSection.value)
                         ButtonColor1.value = Grey
                         ButtonColor2.value = Grey
                         ButtonColor3.value = Turquoise
                         ButtonColor4.value = Grey
+                        selectedOptionTextNIF.value = "NIF"
+                        patients.value = getAllPatients()
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -131,6 +135,35 @@ fun SideBar(onSectionSelected: (Section) -> Unit) {
                             contentDescription = "Add",
                             modifier = Modifier
                                 .padding(10.dp,0.dp,0.dp,0.dp)
+                                .fillMaxWidth()
+                                .wrapContentSize(Alignment.Center)
+                                .size(50.dp),
+                        )
+                    }
+                }
+                Button(
+                    onClick = {
+                        currentSection.value = Section.DENTAL
+                        onSectionSelected(currentSection.value)
+                        ButtonColor1.value = Grey
+                        ButtonColor2.value = Grey
+                        ButtonColor3.value = Grey
+                        ButtonColor4.value = Turquoise
+
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = ButtonColor4.value)
+                ){
+                    Column {
+                        val Calendar = painterResource("drawable/baseline_teeth_white.png")
+                        Image(
+                            painter = Calendar,
+                            contentDescription = "teeth",
+                            modifier = Modifier
+                                .padding(0.dp,0.dp,0.dp,0.dp)
                                 .fillMaxWidth()
                                 .wrapContentSize(Alignment.Center)
                                 .size(50.dp),
@@ -254,54 +287,68 @@ fun Content(currentSection: Section) {
             Section.PATIENTS -> {
                 Column{
                     var Buscador = remember { mutableStateOf("") }
-                    Box(
-                        modifier = Modifier
-                            .padding(30.dp,30.dp,30.dp,15.dp)
-                            .fillMaxWidth()
-                            .shadow(elevation = 20.dp, spotColor = Turquoise)
-                            .clip(shape = RoundedCornerShape(10.dp))
-                            .background(White)
-                            .height(50.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
+                    Row {
+                        Box(
                             modifier = Modifier
+                                .padding(30.dp,30.dp,15.dp,15.dp)
                                 .fillMaxWidth()
-                                .padding(horizontal = 8.dp)
+                                .weight(1f)
+                                .shadow(elevation = 20.dp, shape = RoundedCornerShape(15.dp), spotColor = Turquoise)
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .background(White)
+                                .height(50.dp)
                         ) {
-                            IconButton(onClick = {}
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 8.dp)
                             ) {
-                                androidx.compose.material.Icon(
-                                    Icons.Filled.Search,
-                                    tint = Turquoise,
-                                    modifier = Modifier.background(White),
-                                    contentDescription = "CalendarDatePicker"
+                                IconButton(onClick = {}
+                                ) {
+                                    Icon(
+                                        Icons.Filled.Search,
+                                        tint = Turquoise,
+                                        modifier = Modifier.background(White),
+                                        contentDescription = "CalendarDatePicker"
+                                    )
+                                }
+                                TextField(
+                                    value = Buscador.value,
+                                    onValueChange = { Buscador.value = it },
+                                    modifier = Modifier.fillMaxWidth(),
+                                    colors = TextFieldDefaults.textFieldColors(
+                                        backgroundColor = White,
+                                        focusedIndicatorColor = Turquoise,
+                                        cursorColor = Grey,
+                                        textColor = Dark2,
+                                        unfocusedIndicatorColor = White
+                                    ),
+                                    textStyle = TextStyle(
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 16.sp
+                                    ),
+                                    keyboardOptions = KeyboardOptions.Default.copy(
+                                        keyboardType = KeyboardType.Number
+                                    ),
+                                    keyboardActions = KeyboardActions(
+                                        onDone = {
+                                            // Puedes manejar la acción "Done" si es necesario
+                                        }
+                                    )
                                 )
                             }
-                            TextField(
-                                value = Buscador.value,
-                                onValueChange = { Buscador.value = it },
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = TextFieldDefaults.textFieldColors(
-                                    backgroundColor = White,
-                                    focusedIndicatorColor = Turquoise,
-                                    cursorColor = Grey,
-                                    textColor = Dark2,
-                                    unfocusedIndicatorColor = White
-                                ),
-                                textStyle = TextStyle(
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp
-                                ),
-                                keyboardOptions = KeyboardOptions.Default.copy(
-                                    keyboardType = KeyboardType.Number
-                                ),
-                                keyboardActions = KeyboardActions(
-                                    onDone = {
-                                        // Puedes manejar la acción "Done" si es necesario
-                                    }
-                                )
-                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .padding(0.dp,30.dp,30.dp,15.dp)
+                                .width(500.dp)
+                                .shadow(elevation = 20.dp, shape = RoundedCornerShape(15.dp),spotColor = Turquoise)
+                                .clip(shape = RoundedCornerShape(10.dp))
+                                .background(White)
+                                .height(50.dp)
+                        ){
+
                         }
                     }
                     Card (elevation = 3.dp, modifier = Modifier
@@ -311,7 +358,31 @@ fun Content(currentSection: Section) {
                         .shadow(elevation = 30.dp,spotColor = Grey)
                         .clip(shape = RoundedCornerShape(15.dp)),
                     ) {
-                        Text("ESTA PARTE SERÁ GRACIOSA DE IMPLEMENTAR", modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center))
+                        searcherResults()
+                    }
+                }
+            }
+            Section.DENTAL -> {
+                Card (elevation = 3.dp, modifier = Modifier
+                    .padding(30.dp)
+                    .wrapContentSize(Alignment.Center)
+                    .fillMaxSize()
+                    .shadow(elevation = 30.dp,spotColor = Grey)
+                    .clip(shape = RoundedCornerShape(15.dp)),
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ){
+                        Box(modifier = Modifier.fillMaxSize().weight(1.75f).background(White)){
+                            Card (elevation = 1.dp, modifier = Modifier
+                                .padding(30.dp)
+                                .wrapContentSize(Alignment.Center)
+                                .fillMaxSize()
+                                .clip(shape = RoundedCornerShape(10.dp)),
+                            ){
+                            }
+                        }
                     }
                 }
             }
@@ -359,6 +430,11 @@ fun TopBar(onMenuClickProfile: () -> Unit) {
                         .wrapContentSize(
                             align = Alignment.Center
                         )
+                        .clickable {
+                            currentSection.value = Section.HOME
+                        }
+
+
                 )
             }
             Row(
@@ -396,7 +472,15 @@ fun TopBar(onMenuClickProfile: () -> Unit) {
                     }
                 }
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        if (!isSidePanelVisible.value) {
+                            jajaja.value = false
+                            isSidePanelVisible.value = true
+                        }
+                        else if (isSidePanelVisible.value) {
+                            jajaja.value = true
+                        }
+                              },
                     modifier = Modifier
                         .padding(10.dp,0.dp,0.dp,0.dp)
                 ){
@@ -410,14 +494,14 @@ fun TopBar(onMenuClickProfile: () -> Unit) {
         }
     }
 }
+
 //Piezas para el login.
 @Composable
 fun LoginPage(onClose: () -> Unit) {
     val icon = painterResource("drawable/PearlTeethIcon.png")
     val state = WindowState(width = 500.dp, height = 700.dp,position = WindowPosition.Aligned(Alignment.Center))
-    var visibility by remember { mutableStateOf(true) }
     var isMaxScreen by remember { mutableStateOf(false) }
-    Window(onCloseRequest = { onClose.invoke();MainD.desconecta() }, title = "Login", visible = visibility, state = state, icon = icon, resizable = false) {
+    Window(onCloseRequest = { onClose.invoke();MainD.desconecta() }, title = "Login", visible = visibility.value, state = state, icon = icon, resizable = false) {
         Scaffold(
             content = { padding ->
                 Surface(
@@ -568,13 +652,14 @@ fun LoginPage(onClose: () -> Unit) {
                                                 fontSize = 16.sp
                                             )
                                         )
-
-                                        var isSecondWindowOpen by remember { mutableStateOf(false) }
                                         Button(
                                             onClick = {
                                                 if (validateFieldsLogin(Mail.value, Password.value)) {
-                                                    isSecondWindowOpen = true
+                                                    accountName = Mail.value
+                                                    isSecondWindowOpen.value = true
                                                     isMaxScreen = !isMaxScreen
+                                                    Mail.value = ""
+                                                    Password.value = ""
                                                 } else {
                                                     showOverlayLogin.value = true
                                                 }
@@ -596,14 +681,13 @@ fun LoginPage(onClose: () -> Unit) {
                                                     .wrapContentSize(Alignment.Center)
                                             )
                                         }
-                                        if (isSecondWindowOpen) {
+                                        if (isSecondWindowOpen.value) {
                                             menu(
                                                 onClose = {
-                                                    isSecondWindowOpen = false
-                                                    visibility = true
+                                                    showOverlayLogOut.value = true
                                                 }
                                             )
-                                            visibility = false
+                                            visibility.value = false
                                         }
                                     }
                                 }

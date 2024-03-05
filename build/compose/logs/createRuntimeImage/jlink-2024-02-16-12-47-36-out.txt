@@ -1,0 +1,12 @@
+Error: Module java.sql.* not found
+java.lang.module.FindException: Module java.sql.* not found
+	at java.base/java.lang.module.Resolver.findFail(Resolver.java:892)
+	at java.base/java.lang.module.Resolver.resolve(Resolver.java:129)
+	at java.base/java.lang.module.Configuration.resolve(Configuration.java:420)
+	at java.base/java.lang.module.Configuration.resolve(Configuration.java:254)
+	at jdk.jlink/jdk.tools.jlink.internal.Jlink$JlinkConfiguration.resolve(Jlink.java:217)
+	at jdk.jlink/jdk.tools.jlink.internal.JlinkTask.createImageProvider(JlinkTask.java:523)
+	at jdk.jlink/jdk.tools.jlink.internal.JlinkTask.createImage(JlinkTask.java:411)
+	at jdk.jlink/jdk.tools.jlink.internal.JlinkTask.run(JlinkTask.java:286)
+	at jdk.jlink/jdk.tools.jlink.internal.Main.run(Main.java:56)
+	at jdk.jlink/jdk.tools.jlink.internal.Main.main(Main.java:34)

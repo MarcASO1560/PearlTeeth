@@ -15,7 +15,7 @@
           </flagArguments>
           <stringArguments>
             <stringArg name="destination" arg="$MODULE_DIR$/../../build/classes/kotlin/test" />
-            <stringArg name="jvmTarget" arg="1.8" />
+            <stringArg name="jvmTarget" arg="21" />
             <stringArg name="moduleName" arg="PearlTeeth_test" />
             <stringArg name="apiVersion" arg="1.9" />
             <stringArg name="languageVersion" arg="1.9" />
@@ -44,38 +44,58 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="PearlTeeth.main" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.material3:material3-desktop:1.2.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:4.9.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.9.21" level="project" />
+    <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okio:okio:2.8.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.darkrockstudios:mpfilepicker-jvm:3.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.mysql:mysql-connector-j:8.0.31" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.material:material-ripple-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.foundation:foundation-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.material:material-icons-core-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-text-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-graphics-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.runtime:runtime-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.25.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.compose.desktop:desktop-jvm:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.19.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.animation:animation-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.skiko:skiko-awt:0.7.85.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-unit-desktop:1.5.11" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-tooling-desktop:1.5.1" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.compose.material:material-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.foundation:foundation-desktop:1.5.11" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-tooling-preview-desktop:1.5.11" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.foundation:foundation-layout-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.runtime:runtime-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-tooling-data-desktop:1.5.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.material:material-ripple-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.material:material-icons-core-desktop:1.5.11" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.compose.animation:animation-core-desktop:1.5.11" level="project" />
-    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-geometry-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-text-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.animation:animation-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.skiko:skiko-awt:0.7.85.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.compose.runtime:runtime-saveable-desktop:1.5.11" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-graphics-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-unit-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.ui:ui-geometry-desktop:1.5.11" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.compose.foundation:foundation-layout-desktop:1.5.11" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.skiko:skiko-awt-runtime-windows-x64:0.7.85.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains:annotations:23.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.compose.ui:ui-util-desktop:1.5.11" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-linux:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-linux-arm32:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-linux-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-macos:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-macos-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-windows:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-windows-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl-tinyfd:natives-windows-x86:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-linux:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-linux-arm32:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-linux-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-macos:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-macos-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-windows:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-windows-arm64:3.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.lwjgl:lwjgl:natives-windows-x86:3.3.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.compose.ui:ui-util-desktop:1.5.11" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.kotlinx:atomicfu-jvm:0.17.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="PearlTeeth.main" />
 </module>

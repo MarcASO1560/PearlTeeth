@@ -11,10 +11,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
+import kotlinx.coroutines.delay
 
 fun main() = application {
     System.setProperty("skiko.renderApi", "OPENGL")
@@ -30,17 +30,17 @@ fun main() = application {
         visible = showSplashScreen,
         state = WindowState(position = WindowPosition.Aligned(Alignment.Center), width = 400.dp, height = 400.dp)
     ) {
-        SplashScreen()
+        AnimatedSplashScreen()
     }
     // Iniciar la conexión de manera asíncrona
     LaunchedEffect(Unit) {
+        delay(2000)
         conecta(
             onSuccess = {
                 isConnectionReady = true
                 showSplashScreen = false
             },
-            onError = { sqle ->
-                println("Error connecting to the database: $sqle")
+            onError = {
                 showSplashScreen = false
             }
         )
@@ -49,45 +49,35 @@ fun main() = application {
         LoginPage(onClose = ::exitApplication)
     }
 }
-
 @Composable
-fun SplashScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        // Asume que tienes un icono en los recursos llamado `drawable/PearlTeethIcon.png`
-        val icon = painterResource("drawable/PearlTeethIcon.png")
-        Image(painter = icon, contentDescription = "Splash Screen Icon", modifier = Modifier.size(200.dp).shadow(40.dp))
-    }
-}
-@Composable
-fun AnimatedSplashScreen(onAnimationEnd: () -> Unit) {
-    val scale = remember { Animatable(0f) }
-    val alpha = remember { Animatable(1f) }
+fun AnimatedSplashScreen() {
+    val scale = remember { Animatable(0.1f) }
+    val alpha = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
-        scale.animateTo(
-            targetValue = 3f,
-            animationSpec = tween(
-                durationMillis = 1000,
-                easing = FastOutSlowInEasing
-            )
-        )
         alpha.animateTo(
-            targetValue = 0f,
+            targetValue = 1f,
             animationSpec = tween(
-                durationMillis = 1000,
+                durationMillis = 800,
                 easing = LinearEasing
             )
         )
-        onAnimationEnd()
     }
-
+    LaunchedEffect(Unit) {
+        scale.animateTo(
+            targetValue = 0.4f,
+            animationSpec = tween(
+                durationMillis = 1600,
+                easing = FastOutSlowInEasing
+            )
+        )
+    }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        // Asume que tienes un icono en los recursos llamado `drawable/your_icon.png`
         Image(
-            painter = painterResource("drawable/your_icon.png"),
+            painter = painterResource("drawable/PearlTeethIcon.png"),
             contentDescription = "Splash Icon",
             modifier = Modifier.graphicsLayer(
                 scaleX = scale.value,

@@ -26,12 +26,53 @@ import java.time.format.DateTimeParseException
 
 @Composable
 fun DayScaffold() {
-	Row {
-		Column {
+	// Crear un estado de desplazamiento
+	val scrollState = rememberScrollState()
 
+	// Box para mantener tanto el contenido desplazable como la barra de desplazamiento
+	Box(modifier = Modifier.fillMaxSize()) {
+		// Columna desplazable
+		Column(
+			modifier = Modifier
+				.padding(16.dp)
+				.verticalScroll(scrollState)
+		) {
+			(8..14).forEach { hour ->
+				HourRow(hourText = "$hour:00", isHour = true)
+				if (hour < 14) {
+					HourRow(hourText = "$hour:30", isHour = false)
+				}
+			}
 		}
-		Column {
 
-		}
+		// Barra de desplazamiento vertical
+		VerticalScrollbar(
+			modifier = Modifier.align(Alignment.CenterEnd)
+				.fillMaxHeight()
+				.padding(6.dp),
+			adapter = rememberScrollbarAdapter(scrollState)
+		)
+	}
+}
+
+@Composable
+fun HourRow(hourText: String, isHour: Boolean) {
+	Row(
+		modifier = Modifier
+			.fillMaxWidth()
+			.wrapContentSize(align = Alignment.Center)
+			.padding(vertical = if (isHour) 10.dp else 50.dp),
+		verticalAlignment = Alignment.CenterVertically
+	) {
+		Text(text = hourText, fontSize = 20.sp)
+		Spacer(modifier = Modifier.width(16.dp))
+		Box(
+			modifier = Modifier
+				.height(if (isHour) 2.dp else 1.dp)
+				.padding(start = if (isHour) 0.dp else 20.dp)
+				.weight(1f)
+				.align(Alignment.CenterVertically)
+				.background(Grey)
+		)
 	}
 }
