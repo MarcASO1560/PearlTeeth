@@ -41,7 +41,7 @@ java {
 compose.desktop {
     application {
         mainClass = "AppKt"
-        jvmArgs("-Dskiko.rendering.laf.global=true")
+        jvmArgs("-skiko.rendering.laf.global=true")
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             modules("java.instrument" , "java.sql", "jdk.unsupported")
